@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wedding Invitation - Tasya & Fachrul - Sabtu, 03 Oktober 2026">
+  <title>The Wedding of Tasya & Fachrul</title>
+
+  <!-- Google Fonts: Inter Tight -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+  <!-- Three.js for 3D Rotating Rings Object -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="welcome-container">
+    <div class="overlay"></div>
+
+    <div class="content-wrapper">
+      
+      <!-- Top Header Section -->
+      <header class="header-section animate-fade-in" style="--delay: 1;">
+        <div class="pre-header">
+          <span class="line"></span>
+          <span class="pre-header-text">WEDDING INVITATION</span>
+          <span class="line"></span>
+        </div>
+        <h2 class="sub-heading">The Wedding Of</h2>
+      </header>
+
+      <!-- Center Hero Section (Main Names on point with 3D Rotating Ring, Date, Button) -->
+      <section class="hero-section">
+        <!-- Main Names Row with 3D Rings Object -->
+        <div class="names-row animate-fade-in" style="--delay: 2;">
+          <span class="groom-bride-name">Tasya</span>
+          
+          <div class="rings-wrapper">
+            <!-- 3D WebGL Canvas for Rotating Cincin -->
+            <canvas id="cincinCanvas" class="rings-3d-canvas"></canvas>
+            <!-- Fallback Image if WebGL is disabled -->
+            <img src="cincin.png" alt="Rings Icon" class="rings-icon fallback-ring" style="display: none;">
+          </div>
+
+          <span class="groom-bride-name">Fachrul</span>
+        </div>
+
+        <!-- Date -->
+        <p class="wedding-date animate-fade-in" style="--delay: 3;">
+          SABTU &bull; 03 &bull; 10 &bull; 2026
+        </p>
+
+        <!-- Open Invitation Button -->
+        <div class="button-wrapper animate-fade-in" style="--delay: 4;">
+          <button type="button" class="btn-open" id="openBtn">
+            Open Invitation
+          </button>
+        </div>
+      </section>
+
+      <!-- Bottom Footer Section -->
+      <footer class="footer-section animate-fade-in" style="--delay: 5;">
+        <img src="logo.png" alt="Tasya & Fachrul Monogram" class="footer-logo">
+      </footer>
+
+    </div>
+  </main>
+
+  <script>
+    // Button Interaction
+    document.getElementById('openBtn').addEventListener('click', function() {
+      this.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        this.style.transform = '';
+      }, 150);
+    });
+
+    // ==========================================================================
+    // 3D Smooth Rotating Ring Object (Three.js WebGL)
+    // ==========================================================================
+    (function init3DRings() {
+      const canvas = document.getElementById('cincinCanvas');
+      const fallbackImg = document.querySelector('.fallback-ring');
+
+      if (!canvas || typeof THREE === 'undefined') {
+        if (fallbackImg) fallbackImg.style.display = 'block';
+        return;
+      }
+
+      const displayWidth = 140;
+      const displayHeight = 105;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, displayWidth / displayHeight, 0.1, 1000);
+      camera.position.z = 2.7;
+
+      let renderer;
+      try {
+        renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+        renderer.setSize(displayWidth, displayHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      } catch (e) {
+        if (fallbackImg) fallbackImg.style.display = 'block';
+        if (canvas) canvas.style.display = 'none';
+        return;
+      }
+
+      // Studio Lighting for Metallic Shine
+      const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
+      scene.add(ambientLight);
+
+      const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.8);
+      dirLight1.position.set(3, 4, 5);
+      scene.add(dirLight1);
+
+      const dirLight2 = new THREE.DirectionalLight(0xffd700, 0.8); // Golden warm backlight
+      dirLight2.position.set(-3, -2, -3);
+      scene.add(dirLight2);
+
+      // Load cincin.png texture into 3D Mesh
+      const textureLoader = new THREE.TextureLoader();
+      textureLoader.load('cincin.png', function(texture) {
+        texture.minFilter = THREE.LinearFilter;
+        texture.magFilter = THREE.LinearFilter;
+
+        const imgAspect = (texture.image && texture.image.width) ? (texture.image.width / texture.image.height) : 1.33;
+        const planeGeo = new THREE.PlaneGeometry(1.6 * imgAspect, 1.6, 1, 1);
+        
+        const material = new THREE.MeshStandardMaterial({
+          map: texture,
+          transparent: true,
+          alphaTest: 0.05,
+          side: THREE.DoubleSide,
+          roughness: 0.25,
+          metalness: 0.75
+        });
+
+        const ringMesh = new THREE.Mesh(planeGeo, material);
+        scene.add(ringMesh);
+
+        // Smooth Animation Loop
+        let clock = new THREE.Clock();
+        function renderLoop() {
+          requestAnimationFrame(renderLoop);
+          const elapsedTime = clock.getElapsedTime();
+          
+          // Continuous 360-degree Y-axis rotation
+          ringMesh.rotation.y = elapsedTime * 1.35;
+          
+          // Smooth 3D floating animation
+          ringMesh.position.y = Math.sin(elapsedTime * 2.2) * 0.07;
+          
+          // Subtle dynamic X-axis tilt
+          ringMesh.rotation.x = Math.sin(elapsedTime * 1.4) * 0.12;
+
+          renderer.render(scene, camera);
+        }
+        renderLoop();
+      }, undefined, function(err) {
+        console.warn('Fallback to 2D image due to texture load error');
+        if (fallbackImg) fallbackImg.style.display = 'block';
+        if (canvas) canvas.style.display = 'none';
+      });
+    })();
+  </script>
+</body>
+</html>
