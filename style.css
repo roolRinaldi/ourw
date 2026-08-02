@@ -21,25 +21,30 @@
 
 html, body {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
-  font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: #0b0b0d;
+  font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  touch-action: manipulation;
 }
 
 /* ==========================================================================
-   Full Screen Welcome Container
+   Full Screen Welcome Container (Normal Website & Mobile Responsive)
    ========================================================================== */
 .welcome-container {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
   background: url('background.png') no-repeat center center / cover;
   background-attachment: fixed;
+  overflow: hidden;
 }
 
 /* Dark Tint Overlay */
@@ -51,16 +56,18 @@ html, body {
   height: 100%;
   background: rgba(0, 0, 0, 0.58);
   backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
   z-index: 1;
 }
 
-/* Main Content Wrapper (Header - Center Hero - Footer Layout) */
+/* Main Content Wrapper (Normal Full Width Layout) */
 .content-wrapper {
   position: relative;
   z-index: 2;
-  width: 90%;
+  width: 92%;
   max-width: 950px;
   height: 100vh;
+  height: 100dvh;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -68,7 +75,19 @@ html, body {
   align-items: center;
   text-align: center;
   color: #ffffff;
-  padding: clamp(2rem, 5vh, 3.5rem) 1rem clamp(1.8rem, 4vh, 2.5rem) 1rem;
+  padding: max(2rem, env(safe-area-inset-top, 2rem)) max(1rem, env(safe-area-inset-right, 1rem)) max(1.8rem, env(safe-area-inset-bottom, 1.8rem)) max(1rem, env(safe-area-inset-left, 1rem));
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Hide scrollbar while preserving scroll functionality */
+.content-wrapper::-webkit-scrollbar {
+  display: none;
+}
+.content-wrapper {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* ==========================================================================
@@ -79,6 +98,7 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .pre-header {
@@ -87,31 +107,31 @@ html, body {
   justify-content: center;
   width: 100%;
   max-width: 700px;
-  margin-bottom: 16px;
+  margin-bottom: clamp(10px, 2vh, 16px);
 }
 
 .pre-header .line {
   flex: 1;
   max-width: 180px;
-  min-width: 45px;
+  min-width: 30px;
   height: 1.2px;
   background-color: rgba(255, 255, 255, 0.75);
 }
 
 .pre-header-text {
   font-family: 'Inter Tight', sans-serif;
-  font-size: clamp(0.7rem, 1.4vw, 0.85rem);
+  font-size: clamp(0.65rem, 1.5vw, 0.85rem);
   font-weight: 500;
-  letter-spacing: 0.35em;
+  letter-spacing: clamp(0.18em, 0.5vw, 0.35em);
   color: #ffffff;
-  margin: 0 1.25rem;
+  margin: 0 clamp(0.5rem, 1.5vw, 1.25rem);
   white-space: nowrap;
   text-transform: uppercase;
 }
 
 .sub-heading {
   font-family: 'Patung', 'Brush Script MT', cursive;
-  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-size: clamp(2rem, 5vw, 3.4rem);
   font-weight: normal;
   color: #ffffff;
   margin-top: 0;
@@ -121,7 +141,7 @@ html, body {
 }
 
 /* ==========================================================================
-   2. Center Hero Section ("Tasya" • 3D Rings • "Fachrul" On Point)
+   2. Center Hero Section ("Tasya" • 3D Rings • "Fachrul")
    ========================================================================== */
 .hero-section {
   flex: 1;
@@ -137,15 +157,15 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(0.8rem, 3vw, 2.2rem);
-  margin-bottom: 24px;
+  gap: clamp(0.5rem, 3vw, 2.2rem);
+  margin-bottom: clamp(16px, 3vh, 28px);
   width: 100%;
   flex-wrap: nowrap;
 }
 
 .groom-bride-name {
   font-family: 'Patung', 'Brush Script MT', cursive;
-  font-size: clamp(3rem, 9.5vw, 5.8rem);
+  font-size: clamp(2.4rem, 8vw, 5.8rem);
   font-weight: normal;
   color: #ffffff;
   line-height: 1;
@@ -163,14 +183,14 @@ html, body {
 }
 
 .rings-3d-canvas {
-  width: clamp(70px, 9.5vw, 110px);
-  height: clamp(52px, 7vw, 82px);
+  width: clamp(55px, 8.5vw, 110px);
+  height: clamp(42px, 6.5vw, 82px);
   display: block;
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5));
 }
 
 .rings-icon {
-  height: clamp(40px, 6vw, 62px);
+  height: clamp(38px, 6vw, 62px);
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.5));
@@ -193,18 +213,22 @@ html, body {
 /* Date Section */
 .wedding-date {
   font-family: 'Inter Tight', sans-serif;
-  font-size: clamp(0.78rem, 1.8vw, 1.05rem);
+  font-size: clamp(0.72rem, 1.8vw, 1.05rem);
   font-weight: 500;
-  letter-spacing: 0.28em;
+  letter-spacing: clamp(0.14em, 0.4vw, 0.28em);
   color: #ffffff;
   text-transform: uppercase;
-  margin-bottom: 32px;
+  margin-bottom: clamp(20px, 3.5vh, 32px);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
 }
 
 /* Pill Button Section */
 .button-wrapper {
   margin-bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .btn-open {
@@ -215,6 +239,7 @@ html, body {
   font-weight: 500;
   letter-spacing: 0.01em;
   padding: 12px 34px;
+  min-height: 46px; /* Accessible Touch Target */
   border-radius: 9999px;
   border: none;
   cursor: pointer;
@@ -222,6 +247,8 @@ html, body {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .btn-open:hover {
@@ -243,10 +270,11 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .footer-logo {
-  height: clamp(52px, 6.5vw, 68px);
+  height: clamp(44px, 6.5vw, 68px);
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
@@ -274,29 +302,61 @@ html, body {
 }
 
 /* ==========================================================================
-   Responsive Adjustments
+   Responsive Mobile Adjustments (Up to 480px)
    ========================================================================== */
 @media (max-width: 480px) {
   .content-wrapper {
-    padding: 1.5rem 0.75rem 1.2rem 0.75rem;
+    width: 95%;
+    padding: max(1.5rem, env(safe-area-inset-top, 1.5rem)) 0.75rem max(1.2rem, env(safe-area-inset-bottom, 1.2rem)) 0.75rem;
   }
 
   .pre-header .line {
-    max-width: 50px;
+    max-width: 55px;
+    min-width: 20px;
   }
 
   .pre-header-text {
-    letter-spacing: 0.22em;
+    letter-spacing: 0.18em;
     margin: 0 0.5rem;
   }
 
   .names-row {
-    gap: 0.4rem;
-    margin-bottom: 20px;
+    gap: 0.3rem;
+  }
+
+  .groom-bride-name {
+    font-size: clamp(2.2rem, 9.5vw, 3.6rem);
   }
 
   .wedding-date {
-    letter-spacing: 0.18em;
-    margin-bottom: 24px;
+    letter-spacing: 0.15em;
   }
 }
+
+/* Low Height / Landscape Viewports (Screen height < 600px) */
+@media (max-height: 600px) {
+  .content-wrapper {
+    height: auto;
+    min-height: 100dvh;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .hero-section {
+    margin: 1rem 0;
+  }
+
+  .sub-heading {
+    font-size: 2rem;
+  }
+
+  .groom-bride-name {
+    font-size: 2.8rem;
+  }
+
+  .wedding-date {
+    margin-bottom: 18px;
+  }
+}
+
+

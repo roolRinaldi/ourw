@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <meta name="description" content="Wedding Invitation - Tasya & Fachrul - Sabtu, 03 Oktober 2026">
   <title>The Wedding of Tasya & Fachrul</title>
 
   <!-- Google Fonts: Inter Tight -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300..800;1,300..800&display=swap"
+    rel="stylesheet">
 
   <!-- Three.js for 3D Rotating Rings Object -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -17,13 +19,14 @@
   <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <main class="welcome-container">
     <div class="overlay"></div>
 
     <div class="content-wrapper">
-      
+
       <!-- Top Header Section -->
       <header class="header-section animate-fade-in" style="--delay: 1;">
         <div class="pre-header">
@@ -39,7 +42,7 @@
         <!-- Main Names Row with 3D Rings Object -->
         <div class="names-row animate-fade-in" style="--delay: 2;">
           <span class="groom-bride-name">Tasya</span>
-          
+
           <div class="rings-wrapper">
             <!-- 3D WebGL Canvas for Rotating Cincin -->
             <canvas id="cincinCanvas" class="rings-3d-canvas"></canvas>
@@ -73,7 +76,7 @@
 
   <script>
     // Button Interaction
-    document.getElementById('openBtn').addEventListener('click', function() {
+    document.getElementById('openBtn').addEventListener('click', function () {
       this.style.transform = 'scale(0.95)';
       setTimeout(() => {
         this.style.transform = '';
@@ -92,8 +95,8 @@
         return;
       }
 
-      const displayWidth = 140;
-      const displayHeight = 105;
+      let displayWidth = canvas.clientWidth || 100;
+      let displayHeight = canvas.clientHeight || 75;
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(45, displayWidth / displayHeight, 0.1, 1000);
@@ -102,13 +105,28 @@
       let renderer;
       try {
         renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-        renderer.setSize(displayWidth, displayHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2.5));
+        renderer.setSize(displayWidth, displayHeight, false);
       } catch (e) {
         if (fallbackImg) fallbackImg.style.display = 'block';
         if (canvas) canvas.style.display = 'none';
         return;
       }
+
+      function updateRendererSize() {
+        const rect = canvas.getBoundingClientRect();
+        const w = rect.width || 100;
+        const h = rect.height || 75;
+        if (w !== displayWidth || h !== displayHeight) {
+          displayWidth = w;
+          displayHeight = h;
+          camera.aspect = displayWidth / displayHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(displayWidth, displayHeight, false);
+        }
+      }
+
+      window.addEventListener('resize', updateRendererSize);
 
       // Studio Lighting for Metallic Shine
       const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
@@ -124,13 +142,13 @@
 
       // Load cincin.png texture into 3D Mesh
       const textureLoader = new THREE.TextureLoader();
-      textureLoader.load('cincin.png', function(texture) {
+      textureLoader.load('cincin.png', function (texture) {
         texture.minFilter = THREE.LinearFilter;
         texture.magFilter = THREE.LinearFilter;
 
         const imgAspect = (texture.image && texture.image.width) ? (texture.image.width / texture.image.height) : 1.33;
         const planeGeo = new THREE.PlaneGeometry(1.6 * imgAspect, 1.6, 1, 1);
-        
+
         const material = new THREE.MeshStandardMaterial({
           map: texture,
           transparent: true,
@@ -147,21 +165,22 @@
         let clock = new THREE.Clock();
         function renderLoop() {
           requestAnimationFrame(renderLoop);
+          updateRendererSize();
           const elapsedTime = clock.getElapsedTime();
-          
+
           // Continuous 360-degree Y-axis rotation
           ringMesh.rotation.y = elapsedTime * 1.35;
-          
+
           // Smooth 3D floating animation
           ringMesh.position.y = Math.sin(elapsedTime * 2.2) * 0.07;
-          
+
           // Subtle dynamic X-axis tilt
           ringMesh.rotation.x = Math.sin(elapsedTime * 1.4) * 0.12;
 
           renderer.render(scene, camera);
         }
         renderLoop();
-      }, undefined, function(err) {
+      }, undefined, function (err) {
         console.warn('Fallback to 2D image due to texture load error');
         if (fallbackImg) fallbackImg.style.display = 'block';
         if (canvas) canvas.style.display = 'none';
@@ -169,4 +188,5 @@
     })();
   </script>
 </body>
+
 </html>
