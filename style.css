@@ -360,3 +360,1033 @@ html, body {
 }
 
 
+/* ==========================================================================
+   5. Homepage Layout (Figma Node 11755-6 Implementation)
+   ========================================================================== */
+.homepage-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #000000;
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* --------------------------------------------------------------------------
+   Desktop Split Screen Layout: Left Static Content Frame
+   -------------------------------------------------------------------------- */
+.static-content-frame {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: calc(100vw - 480px);
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  z-index: 1;
+  background-color: #050505;
+}
+
+.static-bg-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.static-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(4px);
+  transform: scale(1.04);
+}
+
+.static-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* Radial Vignette Effect */
+.static-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 2;
+}
+
+/* Ring Monogram in Center of Static Frame */
+.static-ring-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  width: clamp(140px, 15vw, 190px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.static-ring-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.65));
+}
+
+/* --------------------------------------------------------------------------
+   Desktop Split Screen Layout: Right Main Scrollable Frame
+   -------------------------------------------------------------------------- */
+.main-content-frame {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 480px;
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 2;
+  background-color: #000000;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Hide scrollbar while enabling scrolling */
+.main-content-frame::-webkit-scrollbar {
+  width: 5px;
+}
+.main-content-frame::-webkit-scrollbar-track {
+  background: #0b0b0d;
+}
+.main-content-frame::-webkit-scrollbar-thumb {
+  background: #25252b;
+  border-radius: 4px;
+}
+
+.hp-section {
+  position: relative;
+  width: 100%;
+  background-color: #000000;
+}
+
+/* ==========================================================================
+   A. Homepage Hero Section
+   ========================================================================== */
+.hero-hp-section {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 20px;
+  overflow: hidden;
+}
+
+.hero-hp-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.hero-hp-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(2.5px);
+  transform: scale(1.05);
+}
+
+.hero-hp-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 50%, #000000 100%);
+}
+
+.hero-hp-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  min-height: calc(100vh - 80px);
+  min-height: calc(100dvh - 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+/* Top Monogram Badge */
+.top-badge-wrapper {
+  margin-top: 10px;
+}
+
+.top-badge-pill {
+  width: 42px;
+  height: 60px;
+  border: 0.3px solid #fafafa;
+  border-radius: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.top-badge-icon {
+  width: 20px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* Names Group */
+.hero-names-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+  width: 100%;
+  max-width: 420px;
+}
+
+.hero-name {
+  font-family: 'Patung', 'Brush Script MT', cursive;
+  font-size: clamp(4.2rem, 16vw, 5.6rem);
+  font-weight: normal;
+  color: #fafafa;
+  line-height: 0.95;
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+  margin: 0;
+}
+
+.name-fachrul {
+  align-self: flex-start;
+  margin-left: 24px;
+}
+
+.hero-ampersand {
+  font-family: 'Patung', 'Brush Script MT', cursive;
+  font-size: clamp(4rem, 15vw, 5.2rem);
+  color: #fafafa;
+  transform: rotate(12.78deg);
+  margin: -15px 0;
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+}
+
+.name-tasya {
+  align-self: flex-end;
+  margin-right: 24px;
+}
+
+/* Subtitle */
+.hero-subtitle {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 4.2px;
+  text-transform: uppercase;
+  color: #fafafa;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Scroll Down Pill */
+.scroll-down-wrapper {
+  margin-bottom: 20px;
+}
+
+.scroll-down-pill {
+  width: 42px;
+  height: 60px;
+  border: 0.3px solid #fafafa;
+  border-radius: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: bounceDown 2.2s ease-in-out infinite;
+}
+
+.scroll-down-icon {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+@keyframes bounceDown {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(6px);
+  }
+  60% {
+    transform: translateY(3px);
+  }
+}
+
+/* ==========================================================================
+   B. Quran Verse Section (QS Ar-Ruum : 21)
+   ========================================================================== */
+.ayat-hp-section {
+  background-color: #000000;
+  padding: 65px 35px;
+  text-align: center;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ayat-container {
+  max-width: 400px;
+  width: 100%;
+}
+
+.ayat-bismillah {
+  font-family: 'Inter Tight', sans-serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: -0.14px;
+  color: #ffffff;
+  margin-bottom: 18px;
+}
+
+.ayat-quote {
+  font-family: 'Inter Tight', sans-serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.7;
+  letter-spacing: -0.14px;
+  color: #ffffff;
+  margin-bottom: 24px;
+}
+
+.ayat-surah {
+  font-family: 'Inter Tight', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -0.16px;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   C & D. Bride & Groom Section Base Styling
+   ========================================================================== */
+.couple-hp-section {
+  min-height: 940px;
+  padding: 70px 24px 60px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ffffff;
+}
+
+.couple-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.couple-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(5px);
+  transform: scale(1.05);
+}
+
+.couple-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.15) 25%, rgba(0, 0, 0, 0.15) 75%, #000000 100%);
+  z-index: 1;
+}
+
+.couple-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Salam Header */
+.salam-block {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.salam-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.salam-text {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: -0.14px;
+  color: #ffffff;
+  margin-bottom: 18px;
+  padding: 0 10px;
+}
+
+.salam-divider {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.line-svg {
+  width: 118px;
+  height: auto;
+  display: block;
+}
+
+/* Framed Photo & Overlay Title */
+.framed-photo-container {
+  position: relative;
+  width: 327px;
+  height: 360px;
+  margin-bottom: 45px;
+}
+
+.photo-border-box {
+  width: 327px;
+  height: 360px;
+  border: 1px solid #fafafa;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.couple-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Overlay Title in Patung Font */
+.section-script-title {
+  font-family: 'Patung', 'Brush Script MT', cursive;
+  font-size: 50px;
+  font-weight: normal;
+  color: #ffffff;
+  position: absolute;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.title-bride {
+  top: 10px;
+  left: -20px;
+}
+
+.title-groom {
+  top: 10px;
+  right: -20px;
+}
+
+/* Person & Parents Info Block */
+.person-info-block {
+  width: 100%;
+  padding: 0 10px;
+}
+
+.person-full-name {
+  font-family: 'Inter Tight', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 30px;
+  color: #ffffff;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+  margin-bottom: 24px;
+}
+
+.name-indent {
+  margin-left: 40px;
+}
+
+.groom-name-right {
+  text-align: right;
+  margin-left: 0;
+}
+
+.parents-meta-label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 22px;
+  gap: 12px;
+}
+
+.meta-label-text {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: -0.28px;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.meta-line {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.line-svg-full {
+  width: 100%;
+  height: 1px;
+  display: block;
+}
+
+/* Parents Names Layout */
+.parents-names-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 10px;
+}
+
+.parent-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.parent-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: -0.28px;
+  min-width: 65px;
+}
+
+.parent-name {
+  font-family: 'Inter Tight', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 20px;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.parent-and-divider {
+  font-family: 'Patung', 'Brush Script MT', cursive;
+  font-size: 30px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: -4px 0 -4px 20px;
+}
+
+
+/* ==========================================================================
+   6. Responsive Mobile Setup (max-width: 768px)
+   When responsive becomes mobile, only the frame content remains.
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Hide static content frame completely on mobile */
+  .static-content-frame {
+    display: none !important;
+  }
+
+  /* Main frame expands to fill full viewport width */
+  .main-content-frame {
+    position: relative;
+    right: auto;
+    left: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-shadow: none;
+  }
+
+  .framed-photo-container {
+    width: min(327px, 88vw);
+    height: calc(min(327px, 88vw) * (360 / 327));
+  }
+
+  .photo-border-box {
+    width: 100%;
+    height: 100%;
+  }
+
+  .title-bride {
+    left: -10px;
+    font-size: clamp(2.4rem, 11vw, 3.2rem);
+  }
+
+  .title-groom {
+    right: -10px;
+    font-size: clamp(2.4rem, 11vw, 3.2rem);
+  }
+
+  .person-full-name {
+    font-size: clamp(1.5rem, 6.5vw, 1.875rem);
+  }
+}
+
+
+/* ==========================================================================
+   E. The Date Section Styling (Figma Node 11801:4215)
+   ========================================================================== */
+.date-hp-section {
+  background-color: #fafafa;
+  color: #010101;
+  padding: 60px 20px;
+  position: relative;
+  overflow: hidden;
+  min-height: 1253px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.date-bg-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.date-content-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header & Quote */
+.date-header-block {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.date-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.date-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: #010101;
+  white-space: nowrap;
+}
+
+.date-header-line {
+  flex: 1;
+  max-width: 155px;
+  height: 1px;
+  background-color: #010101;
+}
+
+.date-quote {
+  font-family: 'Inter Tight', sans-serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.6;
+  letter-spacing: -0.14px;
+  color: #010101;
+  max-width: 400px;
+  margin: 0 auto 35px auto;
+  text-align: center;
+}
+
+/* Countdown Timer */
+.countdown-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.cd-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90px;
+}
+
+.cd-number {
+  font-family: 'Patung', 'Brush Script MT', cursive;
+  font-size: 50px;
+  line-height: 1;
+  color: #010101;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.cd-line {
+  width: 100%;
+  height: 0.5px;
+  background-color: rgba(1, 1, 1, 0.4);
+  margin: 8px 0;
+}
+
+.cd-label {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: -0.28px;
+  color: #010101;
+  text-align: center;
+}
+
+.cd-colon {
+  font-family: 'Patung', 'Brush Script MT', cursive;
+  font-size: 50px;
+  line-height: 1;
+  color: #010101;
+}
+
+/* Save the Date Button */
+.save-date-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 15px;
+}
+
+.save-date-line {
+  flex: 1;
+  max-width: 122px;
+  height: 0.5px;
+  background-color: #010101;
+}
+
+.btn-save-date {
+  background-color: #fafafa;
+  color: #010101;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 10px 24px;
+  border-radius: 100px;
+  border: 1px solid #010101;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.btn-save-date:hover {
+  background-color: #010101;
+  color: #fafafa;
+  transform: translateY(-1px);
+}
+
+.btn-save-date:active {
+  transform: translateY(1px);
+}
+
+/* Calendar Strip Container & Day Elements */
+.calendar-strip-container {
+  width: 100%;
+  margin-bottom: 60px;
+  display: flex;
+  justify-content: center;
+}
+
+.calendar-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  position: relative;
+  min-height: 160px;
+}
+
+.cal-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  text-align: center;
+  position: relative;
+}
+
+.cal-day-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.cal-day-name {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.35);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.cal-header-line {
+  width: 100%;
+  height: 0.89px;
+  background-color: rgba(0, 0, 0, 0.35);
+  margin-top: 6px;
+}
+
+.cal-day-num {
+  font-family: 'Patung', 'Brush Script MT', cursive;
+  font-size: 40px;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.35);
+  text-transform: uppercase;
+}
+
+/* Featured Capsule (Sabtu 03 OKT) */
+.cal-day-active {
+  width: 98px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.double-capsule-outline {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.capsule-outer {
+  position: absolute;
+  inset: 0;
+  border: 0.89px solid #000000;
+  border-radius: 106px;
+}
+
+.capsule-inner {
+  position: absolute;
+  top: 4.8px;
+  bottom: 4.8px;
+  left: 4.2px;
+  right: 4.2px;
+  border: 0.89px solid #000000;
+  border-radius: 106px;
+}
+
+.cal-active-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cal-day-name.active-name {
+  font-size: 14px;
+  color: #000000;
+}
+
+.cal-header-line.active-line {
+  background-color: #000000;
+  height: 0.89px;
+}
+
+.cal-day-num.active-num {
+  font-size: 46px;
+  color: #000000;
+  margin: 4px 0 2px 0;
+}
+
+.cal-month-name {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  text-transform: uppercase;
+}
+
+/* Event Cards Block: Akad & Resepsi */
+.events-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.event-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.event-card-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 25px;
+  gap: 15px;
+}
+
+.header-left .event-header-line {
+  flex: 1;
+  height: 0.5px;
+  background-color: #010101;
+}
+
+.header-right .event-header-line {
+  flex: 1;
+  height: 0.5px;
+  background-color: #010101;
+}
+
+.event-type-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: #010101;
+  letter-spacing: 0;
+}
+
+.event-card-body {
+  padding-left: 95px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.event-time-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.event-time-value {
+  font-family: 'Patung', 'Brush Script MT', cursive;
+  font-size: 50px;
+  line-height: 1;
+  color: #000000;
+}
+
+.event-time-tz {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.35);
+  text-transform: uppercase;
+}
+
+.event-venue {
+  margin-bottom: 24px;
+}
+
+.event-venue-name {
+  font-family: 'Patung', 'Brush Script MT', cursive;
+  font-size: 30px;
+  font-weight: normal;
+  color: #000000;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+.event-venue-address {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.55);
+  line-height: 1.4;
+  letter-spacing: -0.28px;
+}
+
+.btn-location {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fafafa;
+  color: #010101;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 10px 24px;
+  border-radius: 100px;
+  border: 1px solid #010101;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.btn-location:hover {
+  background-color: #010101;
+  color: #fafafa;
+  transform: translateY(-1px);
+}
+
+.btn-location:active {
+  transform: translateY(1px);
+}
+
+@media (max-width: 480px) {
+  .event-card-body {
+    padding-left: 20px;
+  }
+
+  .calendar-strip {
+    gap: 8px;
+  }
+
+  .cal-day {
+    width: 38px;
+  }
+
+  .cd-unit {
+    width: 70px;
+  }
+
+  .cd-number, .cd-colon {
+    font-size: 38px;
+  }
+}
+
+
+
+

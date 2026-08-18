@@ -7,10 +7,11 @@
   <meta name="description" content="Wedding Invitation - Tasya & Fachrul - Sabtu, 03 Oktober 2026">
   <title>The Wedding of Tasya & Fachrul</title>
 
-  <!-- Google Fonts: Inter Tight -->
+  <!-- Google Fonts: Inter & Inter Tight -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300..800;1,300..800&display=swap"
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300..800;1,300..800&family=Inter:wght@300;400;500;600&display=swap"
     rel="stylesheet">
 
   <!-- Three.js for 3D Rotating Rings Object -->
@@ -22,7 +23,10 @@
 
 <body>
 
-  <main class="welcome-container">
+  <!-- ==========================================================================
+       1. Welcome Cover Screen
+       ========================================================================== -->
+  <main class="welcome-container" id="welcomeCover">
     <div class="overlay"></div>
 
     <div class="content-wrapper">
@@ -37,8 +41,8 @@
         <h2 class="sub-heading">The Wedding Of</h2>
       </header>
 
-      <!-- Center Hero Section (Main Names on point with 3D Rotating Ring, Date, Button) -->
-      <section class="hero-section">
+      <!-- Center Hero Section (Main Names, 3D Rotating Ring, Date, Button) -->
+      <section class="hero-section-welcome">
         <!-- Main Names Row with 3D Rings Object -->
         <div class="names-row animate-fade-in" style="--delay: 2;">
           <span class="groom-bride-name">Tasya</span>
@@ -74,12 +78,383 @@
     </div>
   </main>
 
+
+  <!-- ==========================================================================
+       2. Homepage Container (Revealed after clicking Open Invitation)
+       ========================================================================== -->
+  <div class="homepage-container" id="homepageContainer" style="display: none;">
+
+    <!-- Left Side: Static Content Frame (Desktop only, remains in same position) -->
+    <aside class="static-content-frame">
+      <div class="static-bg-image">
+        <img src="static_bg.png" alt="Static Wedding Background" class="static-img">
+        <div class="static-overlay"></div>
+      </div>
+      <div class="static-vignette"></div>
+      <div class="static-ring-wrapper">
+        <img src="static_ring.png" alt="Wedding Rings Monogram" class="static-ring-img">
+      </div>
+    </aside>
+
+    <!-- Right Side / Full Width Mobile: Main Scrollable Content Frame -->
+    <main class="main-content-frame" id="mainContentFrame">
+
+      <!-- ----------------------------------------------------------------------
+           Section A: Hero Section
+           ---------------------------------------------------------------------- -->
+      <section class="hp-section hero-hp-section">
+        <div class="hero-hp-bg">
+          <img src="hero_bg.png" alt="Fachrul & Tasya" class="hero-hp-img">
+          <div class="hero-hp-overlay"></div>
+        </div>
+
+        <div class="hero-hp-content">
+          <!-- Top Badge Logo -->
+          <div class="top-badge-wrapper">
+            <div class="top-badge-pill">
+              <img src="top_logo.svg" alt="Monogram Logo" class="top-badge-icon">
+            </div>
+          </div>
+
+          <!-- Main Couple Names -->
+          <div class="hero-names-group">
+            <h1 class="hero-name name-fachrul">Fachrul</h1>
+            <span class="hero-ampersand">&</span>
+            <h1 class="hero-name name-tasya">Tasya</h1>
+          </div>
+
+          <!-- Subtitle -->
+          <p class="hero-subtitle">We’re Getting Married</p>
+
+          <!-- Bottom Scroll Indicator -->
+          <div class="scroll-down-wrapper">
+            <div class="scroll-down-pill">
+              <img src="scroll_down.svg" alt="Scroll Down" class="scroll-down-icon">
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ----------------------------------------------------------------------
+           Section B: Quran Verse Section (Ar-Ruum : 21)
+           ---------------------------------------------------------------------- -->
+      <section class="hp-section ayat-hp-section">
+        <div class="ayat-container">
+          <p class="ayat-bismillah">Bismillahirrahmanirrahim</p>
+          <blockquote class="ayat-quote">
+            &ldquo;Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari
+            jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa
+            kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi
+            kaum yang berpikir.&rdquo;
+          </blockquote>
+          <p class="ayat-surah">QS Ar-Ruum : 21</p>
+        </div>
+      </section>
+
+
+      <!-- ----------------------------------------------------------------------
+           Section C: The Bride Section (Tasya)
+           ---------------------------------------------------------------------- -->
+      <section class="hp-section couple-hp-section bride-hp-section">
+        <div class="couple-bg">
+          <img src="bride_bg.png" alt="Bride Background" class="couple-bg-img">
+          <div class="couple-bg-overlay"></div>
+        </div>
+
+        <div class="couple-content">
+          <!-- Salam Header -->
+          <div class="salam-block">
+            <h3 class="salam-title">Assalamu’alaikum Warahmatullahi Wabarakatuh</h3>
+            <p class="salam-text">
+              Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Ya Allah semoga ridho-Mu tercurah
+              mengiringi pernikahan kami.
+            </p>
+            <div class="salam-divider">
+              <img src="line1.svg" alt="Divider Line" class="line-svg">
+            </div>
+          </div>
+
+          <!-- Framed Photo & Overlay Title -->
+          <div class="framed-photo-container">
+            <div class="photo-border-box">
+              <img src="bride_frame.png" alt="Tasya Farah" class="couple-photo">
+            </div>
+            <h2 class="section-script-title title-bride">The Bride</h2>
+          </div>
+
+          <!-- Person Information -->
+          <div class="person-info-block">
+            <h2 class="person-full-name">
+              <span>Tasya Farah</span><br>
+              <span class="name-indent">Putri Atmanto S.Kom</span>
+            </h2>
+
+            <div class="parents-meta-label">
+              <span class="meta-label-text">Putri dari</span>
+              <div class="meta-line">
+                <img src="line2.svg" alt="Divider Line" class="line-svg-full">
+              </div>
+            </div>
+
+            <div class="parents-names-grid">
+              <div class="parent-row">
+                <span class="parent-title">Alm. Bpk</span>
+                <span class="parent-name">Tjatur Atmanto Teguh Raharjo</span>
+              </div>
+              <div class="parent-and-divider">dan</div>
+              <div class="parent-row">
+                <span class="parent-title">Ibu</span>
+                <span class="parent-name">Tri Murtiningsih</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ----------------------------------------------------------------------
+           Section D: The Groom Section (Fachrul)
+           ---------------------------------------------------------------------- -->
+      <section class="hp-section couple-hp-section groom-hp-section">
+        <div class="couple-bg">
+          <img src="groom_bg.png" alt="Groom Background" class="couple-bg-img">
+          <div class="couple-bg-overlay"></div>
+        </div>
+
+        <div class="couple-content">
+          <!-- Framed Photo & Overlay Title -->
+          <div class="framed-photo-container">
+            <div class="photo-border-box">
+              <img src="groom_frame.png" alt="Fachrul Rinaldi" class="couple-photo">
+            </div>
+            <h2 class="section-script-title title-groom">The Groom</h2>
+          </div>
+
+          <!-- Person Information -->
+          <div class="person-info-block">
+            <h2 class="person-full-name groom-name-right">
+              Fachrul Rinaldi S.Kom
+            </h2>
+
+            <div class="parents-meta-label">
+              <span class="meta-label-text">Putra dari</span>
+              <div class="meta-line">
+                <img src="line2.svg" alt="Divider Line" class="line-svg-full">
+              </div>
+            </div>
+
+            <div class="parents-names-grid">
+              <div class="parent-row">
+                <span class="parent-title">Bpk</span>
+                <span class="parent-name">Bejo Raharjo</span>
+              </div>
+              <div class="parent-and-divider">dan</div>
+              <div class="parent-row">
+                <span class="parent-title">Ibu</span>
+                <span class="parent-name">Maslihat</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ----------------------------------------------------------------------
+           Section E: The Date Section (New Design from Figma)
+           ---------------------------------------------------------------------- -->
+      <section class="hp-section date-hp-section" id="dateSection">
+        <div class="date-bg-pattern"></div>
+
+        <div class="date-content-wrapper">
+          <!-- Section Title & Quote -->
+          <div class="date-header-block">
+            <div class="date-title-row">
+              <span class="date-header-line"></span>
+              <h2 class="date-title">THE DATE</h2>
+              <span class="date-header-line"></span>
+            </div>
+
+            <blockquote class="date-quote">
+              “Pernikahan adalah ibadah, dan setiap ibadah bermuara pada cinta-Nya sebagai tujuan. Sudah sewajarnya setiap upaya meraih cinta-Nya dilakukan dengan sukacita.”
+            </blockquote>
+
+            <!-- Countdown Timer -->
+            <div class="countdown-wrapper" id="countdownWrapper">
+              <div class="cd-unit">
+                <span class="cd-number" id="cdDays">00</span>
+                <div class="cd-line"></div>
+                <span class="cd-label">Hari</span>
+              </div>
+              <span class="cd-colon">:</span>
+              <div class="cd-unit">
+                <span class="cd-number" id="cdHours">00</span>
+                <div class="cd-line"></div>
+                <span class="cd-label">Jam</span>
+              </div>
+              <span class="cd-colon">:</span>
+              <div class="cd-unit">
+                <span class="cd-number" id="cdMinutes">00</span>
+                <div class="cd-line"></div>
+                <span class="cd-label">Menit</span>
+              </div>
+              <span class="cd-colon">:</span>
+              <div class="cd-unit">
+                <span class="cd-number" id="cdSeconds">00</span>
+                <div class="cd-line"></div>
+                <span class="cd-label">Detik</span>
+              </div>
+            </div>
+
+            <!-- Save the Date Button -->
+            <div class="save-date-row">
+              <span class="save-date-line"></span>
+              <button type="button" class="btn-save-date" id="saveDateBtn">Save the Date</button>
+              <span class="save-date-line"></span>
+            </div>
+          </div>
+
+          <!-- Date Calendar Strip -->
+          <div class="calendar-strip-container">
+            <div class="calendar-strip">
+              <!-- Kamis 01 -->
+              <div class="cal-day">
+                <div class="cal-day-header">
+                  <span class="cal-day-name">Kamis</span>
+                  <div class="cal-header-line"></div>
+                </div>
+                <span class="cal-day-num">01</span>
+              </div>
+
+              <!-- Jum'at 02 -->
+              <div class="cal-day">
+                <div class="cal-day-header">
+                  <span class="cal-day-name">Jum’at</span>
+                  <div class="cal-header-line"></div>
+                </div>
+                <span class="cal-day-num">02</span>
+              </div>
+
+              <!-- Sabtu 03 OKT (Featured Highlighted Capsule) -->
+              <div class="cal-day cal-day-active">
+                <div class="double-capsule-outline">
+                  <div class="capsule-outer"></div>
+                  <div class="capsule-inner"></div>
+                </div>
+                <div class="cal-active-content">
+                  <div class="cal-day-header active-header">
+                    <span class="cal-day-name active-name">Sabtu</span>
+                    <div class="cal-header-line active-line"></div>
+                  </div>
+                  <span class="cal-day-num active-num">03</span>
+                  <span class="cal-month-name">OKT</span>
+                </div>
+              </div>
+
+              <!-- Minggu 04 -->
+              <div class="cal-day">
+                <div class="cal-day-header">
+                  <span class="cal-day-name">Minggu</span>
+                  <div class="cal-header-line"></div>
+                </div>
+                <span class="cal-day-num">04</span>
+              </div>
+
+              <!-- Senin 05 -->
+              <div class="cal-day">
+                <div class="cal-day-header">
+                  <span class="cal-day-name">Senin</span>
+                  <div class="cal-header-line"></div>
+                </div>
+                <span class="cal-day-num">05</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Event Cards Section: Akad & Resepsi -->
+          <div class="events-block">
+
+            <!-- AKAD Card -->
+            <div class="event-card akad-card">
+              <div class="event-card-header header-left">
+                <h3 class="event-type-title">AKAD</h3>
+                <div class="event-header-line"></div>
+              </div>
+
+              <div class="event-card-body">
+                <div class="event-time-row">
+                  <span class="event-time-value">07.30</span>
+                  <span class="event-time-tz">WIB</span>
+                </div>
+                <div class="event-venue">
+                  <h4 class="event-venue-name">Masjid Al-Haadii Mustaqiim</h4>
+                  <p class="event-venue-address">Tipes, Kec. Laweyan, Surakarta, Jawa Tengah</p>
+                </div>
+                <a href="https://maps.google.com/?q=Masjid+Al-Haadii+Mustaqiim+Tipes+Surakarta" target="_blank" rel="noopener noreferrer" class="btn-location">
+                  Lihat Lokasi
+                </a>
+              </div>
+            </div>
+
+            <!-- RESEPSI Card -->
+            <div class="event-card resepsi-card">
+              <div class="event-card-header header-right">
+                <div class="event-header-line"></div>
+                <h3 class="event-type-title">RESEPSI</h3>
+              </div>
+
+              <div class="event-card-body">
+                <div class="event-time-row">
+                  <span class="event-time-value">09.30</span>
+                  <span class="event-time-tz">WIB</span>
+                </div>
+                <div class="event-venue">
+                  <h4 class="event-venue-name">Ndalem Marsum</h4>
+                  <p class="event-venue-address">Tipes, Kec. Laweyan, Surakarta, Jawa Tengah</p>
+                </div>
+                <a href="https://maps.google.com/?q=Ndalem+Marsum+Tipes+Surakarta" target="_blank" rel="noopener noreferrer" class="btn-location">
+                  Lihat Lokasi
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+
+  <!-- ==========================================================================
+       Scripts & Interactions
+       ========================================================================== -->
   <script>
-    // Button Interaction
+    // Button Interaction to open Homepage
     document.getElementById('openBtn').addEventListener('click', function () {
       this.style.transform = 'scale(0.95)';
+
+      const welcomeCover = document.getElementById('welcomeCover');
+      const homepageContainer = document.getElementById('homepageContainer');
+
       setTimeout(() => {
-        this.style.transform = '';
+        // Smooth Transition
+        welcomeCover.style.opacity = '0';
+        welcomeCover.style.transition = 'opacity 0.6s ease';
+
+        setTimeout(() => {
+          welcomeCover.style.display = 'none';
+          homepageContainer.style.display = 'block';
+          homepageContainer.style.opacity = '0';
+
+          requestAnimationFrame(() => {
+            homepageContainer.style.transition = 'opacity 0.6s ease';
+            homepageContainer.style.opacity = '1';
+            const mainFrame = document.getElementById('mainContentFrame');
+            if (mainFrame) mainFrame.scrollTop = 0;
+          });
+        }, 600);
       }, 150);
     });
 
@@ -136,7 +511,7 @@
       dirLight1.position.set(3, 4, 5);
       scene.add(dirLight1);
 
-      const dirLight2 = new THREE.DirectionalLight(0xffd700, 0.8); // Golden warm backlight
+      const dirLight2 = new THREE.DirectionalLight(0xffd700, 0.8);
       dirLight2.position.set(-3, -2, -3);
       scene.add(dirLight2);
 
@@ -168,13 +543,8 @@
           updateRendererSize();
           const elapsedTime = clock.getElapsedTime();
 
-          // Continuous 360-degree Y-axis rotation
           ringMesh.rotation.y = elapsedTime * 1.35;
-
-          // Smooth 3D floating animation
           ringMesh.position.y = Math.sin(elapsedTime * 2.2) * 0.07;
-
-          // Subtle dynamic X-axis tilt
           ringMesh.rotation.x = Math.sin(elapsedTime * 1.4) * 0.12;
 
           renderer.render(scene, camera);
@@ -186,6 +556,72 @@
         if (canvas) canvas.style.display = 'none';
       });
     })();
+
+    // ==========================================================================
+    // Real-time Countdown Timer (Target: Saturday, Oct 03, 2026 07:30:00 WIB)
+    // ==========================================================================
+    (function initCountdown() {
+      const targetDate = new Date('2026-10-03T07:30:00+07:00').getTime();
+
+      const daysEl = document.getElementById('cdDays');
+      const hoursEl = document.getElementById('cdHours');
+      const minsEl = document.getElementById('cdMinutes');
+      const secsEl = document.getElementById('cdSeconds');
+
+      function updateTimer() {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+
+        if (diff <= 0) {
+          if (daysEl) daysEl.textContent = '00';
+          if (hoursEl) hoursEl.textContent = '00';
+          if (minsEl) minsEl.textContent = '00';
+          if (secsEl) secsEl.textContent = '00';
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+        if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+        if (minsEl) minsEl.textContent = String(minutes).padStart(2, '0');
+        if (secsEl) secsEl.textContent = String(seconds).padStart(2, '0');
+      }
+
+      updateTimer();
+      setInterval(updateTimer, 1000);
+    })();
+
+    // ==========================================================================
+    // Save the Date Calendar Link Trigger
+    // ==========================================================================
+    const saveDateBtn = document.getElementById('saveDateBtn');
+    if (saveDateBtn) {
+      saveDateBtn.addEventListener('click', function () {
+        const title = encodeURIComponent('The Wedding of Tasya & Fachrul');
+        const details = encodeURIComponent('Pernikahan Tasya & Fachrul.\nAkad: 07.30 WIB di Masjid Al-Haadii Mustaqiim.\nResepsi: 09.30 WIB di Ndalem Marsum.');
+        const location = encodeURIComponent('Tipes, Kec. Laweyan, Surakarta, Jawa Tengah');
+        const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=20261003T003000Z/20261003T060000Z&details=${details}&location=${location}`;
+        window.open(gcalUrl, '_blank');
+      });
+    }
+
+    // ==========================================================================
+    // Scroll Down Pill Navigation
+    // ==========================================================================
+    const scrollDownPill = document.querySelector('.scroll-down-pill');
+    if (scrollDownPill) {
+      scrollDownPill.style.cursor = 'pointer';
+      scrollDownPill.addEventListener('click', function () {
+        const dateSec = document.getElementById('dateSection');
+        if (dateSec) {
+          dateSec.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
   </script>
 </body>
 
