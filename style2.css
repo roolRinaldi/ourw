@@ -4,7 +4,7 @@
 @font-face {
   font-family: 'Patung';
   src: url('Patung.ttf') format('truetype'),
-    url('patung.ttf') format('truetype');
+       url('patung.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -13,16 +13,13 @@
 /* ==========================================================================
    Global Reset & Base Setup
    ========================================================================== */
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html,
-body {
+html, body {
   width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
@@ -35,7 +32,7 @@ body {
 }
 
 /* ==========================================================================
-   Full Screen Welcome Container (Landing Page Cover)
+   Full Screen Welcome Container (Normal Website & Mobile Responsive)
    ========================================================================== */
 .welcome-container {
   position: relative;
@@ -63,24 +60,22 @@ body {
   z-index: 1;
 }
 
-/* Main Content Wrapper (Landing Cover Layout) */
+/* Main Content Wrapper (Normal Full Width Layout) */
 .content-wrapper {
   position: relative;
   z-index: 2;
   width: 92%;
-  max-width: 440px;
-  /* Aligned to Figma specs for mobile proportions */
+  max-width: 950px;
   height: 100vh;
   height: 100dvh;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   text-align: center;
   color: #ffffff;
-  padding: 0;
-  /* Margins will handle spacing */
+  padding: max(2rem, env(safe-area-inset-top, 2rem)) max(1rem, env(safe-area-inset-right, 1rem)) max(1.8rem, env(safe-area-inset-bottom, 1.8rem)) max(1rem, env(safe-area-inset-left, 1rem));
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
@@ -90,21 +85,20 @@ body {
 .content-wrapper::-webkit-scrollbar {
   display: none;
 }
-
 .content-wrapper {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
-/* Header Section */
+/* ==========================================================================
+   1. Top Header Section (Pre-header & "The Wedding Of")
+   ========================================================================== */
 .header-section {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
-  margin-top: 8.5vh;
-  /* 80px out of 940px */
 }
 
 .pre-header {
@@ -112,39 +106,44 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 400px;
+  max-width: 700px;
+  margin-bottom: clamp(10px, 2vh, 16px);
 }
 
 .pre-header .line {
   flex: 1;
-  max-width: 51px;
-  height: 1px;
-  background-color: #fafafa;
+  max-width: 180px;
+  min-width: 30px;
+  height: 1.2px;
+  background-color: rgba(255, 255, 255, 0.75);
 }
 
 .pre-header-text {
   font-family: 'Inter Tight', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: 4.8px;
-  color: #fafafa;
-  margin: 0 14px;
+  font-size: clamp(0.65rem, 1.5vw, 0.85rem);
+  font-weight: 500;
+  letter-spacing: clamp(0.18em, 0.5vw, 0.35em);
+  color: #ffffff;
+  margin: 0 clamp(0.5rem, 1.5vw, 1.25rem);
   white-space: nowrap;
   text-transform: uppercase;
 }
 
 .sub-heading {
   font-family: 'Patung', 'Brush Script MT', cursive;
-  font-size: 50px;
+  font-size: clamp(2rem, 5vw, 3.4rem);
   font-weight: normal;
-  color: #fafafa;
-  margin-top: 24px;
-  margin-bottom: 0;
+  color: #ffffff;
+  margin-top: 0;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  letter-spacing: 0.01em;
   line-height: 1;
 }
 
-/* Center Hero Section ("Tasya" • 3D Rings • "Fachrul") */
-.hero-section-welcome {
+/* ==========================================================================
+   2. Center Hero Section ("Tasya" • 3D Rings • "Fachrul")
+   ========================================================================== */
+.hero-section {
   flex: 1;
   width: 100%;
   display: flex;
@@ -153,64 +152,46 @@ body {
   align-items: center;
 }
 
+/* Main Names Row */
 .names-row {
-  position: relative;
-  width: 100%;
-  max-width: 400px;
-  height: 306px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: auto;
-  flex-shrink: 0;
+  gap: clamp(0.5rem, 3vw, 2.2rem);
+  margin-bottom: clamp(16px, 3vh, 28px);
+  width: 100%;
+  flex-wrap: nowrap;
 }
 
 .groom-bride-name {
   font-family: 'Patung', 'Brush Script MT', cursive;
-  font-size: clamp(4rem, 25vw, 100px);
+  font-size: clamp(2.4rem, 8vw, 5.8rem);
   font-weight: normal;
-  color: #fafafa;
+  color: #ffffff;
   line-height: 1;
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
   white-space: nowrap;
-  position: absolute;
-}
-
-.names-row .groom-bride-name:first-child {
-  top: 40px;
-  left: 20px;
-}
-
-.names-row .groom-bride-name:last-child {
-  bottom: 10px;
-  right: 20px;
 }
 
 /* 3D Rotating Ring Wrapper & Canvas */
 .rings-wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: clamp(90px, 30vw, 126px);
-  height: clamp(60px, 20vw, 80px);
-  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   perspective: 600px;
 }
 
 .rings-3d-canvas {
-  width: 100%;
-  height: 100%;
+  width: clamp(55px, 8.5vw, 110px);
+  height: clamp(42px, 6.5vw, 82px);
   display: block;
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5));
 }
 
 .rings-icon {
-  width: 100%;
-  height: 100%;
+  height: clamp(38px, 6vw, 62px);
+  width: auto;
   object-fit: contain;
   filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.5));
 }
@@ -224,68 +205,55 @@ body {
   from {
     transform: rotateY(0deg);
   }
-
   to {
     transform: rotateY(360deg);
   }
 }
 
+/* Date Section */
 .wedding-date {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 6.4vh;
-  /* 60px distance approx */
-  margin-bottom: 0;
-}
-
-.wedding-date span {
   font-family: 'Inter Tight', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: 1.6px;
+  font-size: clamp(0.72rem, 1.8vw, 1.05rem);
+  font-weight: 500;
+  letter-spacing: clamp(0.14em, 0.4vw, 0.28em);
+  color: #ffffff;
   text-transform: uppercase;
-  color: #fafafa;
+  margin-bottom: clamp(20px, 3.5vh, 32px);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
 }
 
-.date-dot {
-  width: 6px;
-  height: 6px;
-  background-color: #fafafa;
-  border-radius: 50%;
-  display: block;
-}
-
+/* Pill Button Section */
 .button-wrapper {
-  margin-top: 6.6vh;
-  margin-bottom: auto;
-  /* Pushes footer down */
+  margin-bottom: 0;
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
 .btn-open {
-  background-color: #fafafa;
-  color: #010101;
+  background-color: #ffffff;
+  color: #000000;
   font-family: 'Inter Tight', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  padding: 14px 30px;
-  border-radius: 100px;
-  border: 1px solid #010101;
+  font-size: clamp(0.85rem, 1.6vw, 0.95rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 12px 34px;
+  min-height: 46px; /* Accessible Touch Target */
+  border-radius: 9999px;
+  border: none;
   cursor: pointer;
   outline: none;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   -webkit-tap-highlight-color: transparent;
   user-select: none;
+  -webkit-user-select: none;
 }
 
 .btn-open:hover {
   transform: translateY(-2px) scale(1.04);
+  background-color: #f9f9f9;
   box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
 }
 
@@ -294,48 +262,27 @@ body {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
+/* ==========================================================================
+   3. Bottom Footer Section (Monogram)
+   ========================================================================== */
 .footer-section {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  margin-top: 5vh;
-  margin-bottom: 8.5vh;
 }
 
-.footer-logo-container {
-  position: relative;
-  width: 49px;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.footer-logo-ring1 {
-  position: absolute;
-  width: 49px;
-  height: 70px;
-  border: 0.35px solid #fafafa;
-  border-radius: 42px;
-}
-
-.footer-logo-ring2 {
-  position: absolute;
-  width: 44.8px;
-  height: 65.8px;
-  border: 0.35px solid #fafafa;
-  border-radius: 42px;
-}
-
-.footer-logo-icon {
-  width: 23.65px;
-  height: 32.9px;
+.footer-logo {
+  height: clamp(44px, 6.5vw, 68px);
+  width: auto;
   object-fit: contain;
-  z-index: 2;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
 }
 
+/* ==========================================================================
+   4. Fade-In Animations
+   ========================================================================== */
 .animate-fade-in {
   opacity: 0;
   transform: translateY(18px);
@@ -348,7 +295,6 @@ body {
     opacity: 0;
     transform: translateY(18px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -356,7 +302,66 @@ body {
 }
 
 /* ==========================================================================
-   Homepage Layout (Figma Node 11835-15781 / 11835-6)
+   Responsive Mobile Adjustments (Up to 480px)
+   ========================================================================== */
+@media (max-width: 480px) {
+  .content-wrapper {
+    width: 95%;
+    padding: max(1.5rem, env(safe-area-inset-top, 1.5rem)) 0.75rem max(1.2rem, env(safe-area-inset-bottom, 1.2rem)) 0.75rem;
+  }
+
+  .pre-header .line {
+    max-width: 55px;
+    min-width: 20px;
+  }
+
+  .pre-header-text {
+    letter-spacing: 0.18em;
+    margin: 0 0.5rem;
+  }
+
+  .names-row {
+    gap: 0.3rem;
+  }
+
+  .groom-bride-name {
+    font-size: clamp(2.2rem, 9.5vw, 3.6rem);
+  }
+
+  .wedding-date {
+    letter-spacing: 0.15em;
+  }
+}
+
+/* Low Height / Landscape Viewports (Screen height < 600px) */
+@media (max-height: 600px) {
+  .content-wrapper {
+    height: auto;
+    min-height: 100dvh;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .hero-section {
+    margin: 1rem 0;
+  }
+
+  .sub-heading {
+    font-size: 2rem;
+  }
+
+  .groom-bride-name {
+    font-size: 2.8rem;
+  }
+
+  .wedding-date {
+    margin-bottom: 18px;
+  }
+}
+
+
+/* ==========================================================================
+   5. Homepage Layout (Figma Node 11755-6 Implementation)
    ========================================================================== */
 .homepage-container {
   position: fixed;
@@ -406,15 +411,17 @@ body {
   background: rgba(0, 0, 0, 0.25);
 }
 
+/* Radial Vignette Effect */
 .static-vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.85) 100%);
+  background: radial-gradient(circle at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 100%);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   z-index: 2;
 }
 
+/* Ring Monogram in Center of Static Frame */
 .static-ring-wrapper {
   position: absolute;
   top: 50%;
@@ -435,7 +442,7 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   Desktop Split Screen Layout: Right Main Scrollable Frame (Width: 440px)
+   Desktop Split Screen Layout: Right Main Scrollable Frame (Updated Width: 440px)
    -------------------------------------------------------------------------- */
 .main-content-frame {
   position: absolute;
@@ -453,14 +460,13 @@ body {
   box-shadow: -8px 0 30px rgba(0, 0, 0, 0.5);
 }
 
+/* Hide scrollbar while enabling scrolling */
 .main-content-frame::-webkit-scrollbar {
   width: 5px;
 }
-
 .main-content-frame::-webkit-scrollbar-track {
   background: #0b0b0d;
 }
-
 .main-content-frame::-webkit-scrollbar-thumb {
   background: #25252b;
   border-radius: 4px;
@@ -473,16 +479,16 @@ body {
 }
 
 /* ==========================================================================
-   A. Homepage Hero Section (Figma Specs: 440px x 940px)
+   A. Homepage Hero Section (Updated Figma Specs: 440px x 938.67px)
    ========================================================================== */
 .hero-hp-section {
-  height: 940px;
-  min-height: 940px;
+  height: 938.67px;
+  min-height: 938.67px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 73.33px 20px;
+  padding: 73.33px 20px 73.33px 20px;
   overflow: hidden;
   position: relative;
 }
@@ -497,7 +503,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-
+  filter: blur(2.3px);
   transform: scale(1.05);
 }
 
@@ -517,6 +523,11 @@ body {
   justify-content: space-between;
   align-items: center;
   text-align: center;
+}
+
+/* Top Monogram Double Pill Badge (38.5px x 55px) */
+.top-badge-wrapper {
+  margin-top: 0;
 }
 
 .top-badge-outer {
@@ -547,11 +558,12 @@ body {
   object-fit: contain;
 }
 
+/* Names Group (Font Size: 82.5px) */
 .hero-names-group {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0px 0;
+  margin: 30px 0;
   width: 100%;
   max-width: 403px;
   position: relative;
@@ -594,6 +606,7 @@ body {
   margin-right: 18px;
 }
 
+/* Subtitle (12.83px, tracking 3.85px) */
 .hero-subtitle {
   font-family: 'Inter Tight', sans-serif;
   font-size: 12.83px;
@@ -602,8 +615,12 @@ body {
   text-transform: uppercase;
   color: #fafafa;
   margin-bottom: 20px;
-  margin-top: 300px;
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Scroll Down Double Pill Indicator (38.5px x 55px) */
+.scroll-down-wrapper {
+  margin-bottom: 0;
 }
 
 .scroll-down-outer {
@@ -635,31 +652,24 @@ body {
 }
 
 @keyframes bounceDown {
-
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
+  0%, 20%, 50%, 80%, 100% {
     transform: translateY(0);
   }
-
   40% {
     transform: translateY(6px);
   }
-
   60% {
     transform: translateY(3px);
   }
 }
 
 /* ==========================================================================
-   B. Quran Verse Section (Figma Specs: 440px x 272px)
+   B. Quran Verse Section (Updated Figma Specs: 440px x 272.25px)
    ========================================================================== */
 .ayat-hp-section {
   background-color: #000000;
-  height: 272px;
-  min-height: 272px;
+  height: 272.25px;
+  min-height: 272.25px;
   padding: 55px 36.67px;
   text-align: center;
   color: #ffffff;
@@ -710,7 +720,7 @@ body {
 }
 
 /* ==========================================================================
-   C & D. Bride & Groom Section Base Styling (Figma Specs)
+   C & D. Bride & Groom Section Base Styling (Updated Figma Specs)
    ========================================================================== */
 .couple-hp-section {
   position: relative;
@@ -722,14 +732,14 @@ body {
 }
 
 .bride-hp-section {
-  height: 765px;
-  min-height: 765px;
+  height: 765.42px;
+  min-height: 765.42px;
   padding: 129.25px 36.67px 45px 36.67px;
 }
 
 .groom-hp-section {
-  height: 723px;
-  min-height: 723px;
+  height: 723.25px;
+  min-height: 723.25px;
   padding: 128.33px 36.67px 45px 36.67px;
 }
 
@@ -763,6 +773,7 @@ body {
   align-items: center;
 }
 
+/* Framed Photo & Overlay Title (385px x 330px, Inner 299.75px) */
 .framed-photo-container {
   position: relative;
   width: 385px;
@@ -791,6 +802,7 @@ body {
   display: block;
 }
 
+/* Overlay Title in Patung Font (45.83px) */
 .section-script-title {
   font-family: 'Patung', 'Brush Script MT', cursive;
   font-size: 45.83px;
@@ -813,6 +825,7 @@ body {
   right: 0;
 }
 
+/* Person & Parents Info Block */
 .person-info-block {
   width: 100%;
   max-width: 366.67px;
@@ -874,6 +887,7 @@ body {
   display: block;
 }
 
+/* Parents Names Layout */
 .parents-names-layout {
   display: flex;
   flex-direction: column;
@@ -931,8 +945,47 @@ body {
   margin-left: 36px;
 }
 
+
 /* ==========================================================================
-   E. The Date Section Styling (Figma Specs: Node 11835-15781 / 11835-201)
+   6. Responsive Mobile Setup (max-width: 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .static-content-frame {
+    display: none !important;
+  }
+
+  .main-content-frame {
+    position: relative;
+    right: auto;
+    left: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-shadow: none;
+  }
+
+  .framed-photo-container {
+    width: 100%;
+    max-width: 385px;
+  }
+
+  .title-bride {
+    left: 0;
+    font-size: clamp(2.2rem, 10vw, 3rem);
+  }
+
+  .title-groom {
+    right: 0;
+    font-size: clamp(2.2rem, 10vw, 3rem);
+  }
+
+  .person-full-name {
+    font-size: clamp(1.4rem, 6vw, 1.72rem);
+  }
+}
+
+
+/* ==========================================================================
+   E. The Date Section Styling (Updated Figma Specs: 440px x 1194.42px)
    ========================================================================== */
 .date-hp-section {
   position: relative;
@@ -960,12 +1013,11 @@ body {
 }
 
 .bg-date-image-wrapper {
-  position: absolute;
-  top: -25%;
+  position: sticky;
+  top: 0;
   left: 0;
   width: 100%;
-  height: 150%;
-  will-change: transform;
+  height: 100vh;
 }
 
 .bg-date-img {
@@ -978,7 +1030,7 @@ body {
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgba(1, 1, 1, 0.75) 0%, rgba(1, 1, 1, 0.35) 50%, rgba(1, 1, 1, 0.75) 100%);
-  backdrop-filter: blur(1.5px);
+  backdrop-filter: blur(5.5px);
   -webkit-backdrop-filter: blur(5.5px);
 }
 
@@ -996,7 +1048,7 @@ body {
 .date-header-block {
   width: 100%;
   text-align: center;
-  margin-bottom: 180px;
+  margin-bottom: 50px;
 }
 
 .date-title-row {
@@ -1320,71 +1372,7 @@ body {
   transform: translateY(1px);
 }
 
-/* ==========================================================================
-   Responsive Mobile Setup (max-width: 768px, 480px, 390px, 375px, 320px)
-   ========================================================================== */
-@media (max-width: 768px) {
-  .static-content-frame {
-    display: none !important;
-  }
-
-  .main-content-frame {
-    position: relative;
-    right: auto;
-    left: 0;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-shadow: none;
-  }
-
-  .framed-photo-container {
-    width: 100%;
-    max-width: 385px;
-  }
-
-  .title-bride {
-    left: 0;
-    font-size: clamp(2.2rem, 10vw, 3rem);
-  }
-
-  .title-groom {
-    right: 0;
-    font-size: clamp(2.2rem, 10vw, 3rem);
-  }
-
-  .person-full-name {
-    font-size: clamp(1.4rem, 6vw, 1.72rem);
-  }
-}
-
 @media (max-width: 480px) {
-  .content-wrapper {
-    width: 95%;
-    padding: max(1.5rem, env(safe-area-inset-top, 1.5rem)) 0.75rem max(1.2rem, env(safe-area-inset-bottom, 1.2rem)) 0.75rem;
-  }
-
-  .pre-header .line {
-    max-width: 55px;
-    min-width: 20px;
-  }
-
-  .pre-header-text {
-    letter-spacing: 0.18em;
-    margin: 0 0.5rem;
-  }
-
-  .names-row {
-    gap: 0.3rem;
-  }
-
-  .groom-bride-name {
-    font-size: 80px;
-  }
-
-  .wedding-date {
-    letter-spacing: 0.15em;
-  }
-
   .event-section-wrapper {
     gap: 12px;
   }
@@ -1393,8 +1381,7 @@ body {
     width: 90px;
   }
 
-  .date-capsule-card,
-  .capsule-outer-border {
+  .date-capsule-card, .capsule-outer-border {
     width: 90px;
     height: 150px;
   }
@@ -1412,390 +1399,7 @@ body {
     width: 65px;
   }
 
-  .cd-number,
-  .cd-colon {
+  .cd-number, .cd-colon {
     font-size: 35px;
-  }
-}
-
-@media (max-width: 375px) {
-  .groom-bride-name {
-    font-size: 2.3rem;
-  }
-
-  .hero-name {
-    font-size: 68px;
-  }
-
-  .hero-ampersand {
-    font-size: 68px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* ==========================================================================
-   F. Moment Section (Scroll Stack & Expand)
-   ========================================================================== */
-.moment-hp-section {
-  position: relative;
-  width: 100%;
-  height: 300vh;
-  /* High height to allow for scroll duration */
-  background-color: #000000;
-  color: #fafafa;
-}
-
-.moment-sticky-container {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.moment-bg-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
-.moment-bg-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.moment-bg-overlay {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.85) 100%);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-}
-
-.moment-header-block {
-  position: absolute;
-  top: 73.33px;
-  width: 100%;
-  max-width: 403.33px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  z-index: 2;
-  transition: opacity 0.3s ease;
-}
-
-.gift-header {
-  position: relative;
-  top: auto;
-  margin-bottom: 20px;
-}
-
-.moment-title {
-  font-family: 'Inter Tight', sans-serif;
-  font-size: 14.67px;
-  font-weight: 400;
-  letter-spacing: 0;
-  color: #fafafa;
-  white-space: nowrap;
-}
-
-.moment-header-line {
-  flex: 1;
-  max-width: 126.5px;
-  height: 0.92px;
-  background-color: #fafafa;
-}
-
-.moment-photo-stack {
-  position: relative;
-  width: 100%;
-  max-width: 440px;
-  height: 400px;
-  z-index: 3;
-}
-
-.pict-frame {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 180px;
-  height: 240px;
-  background-color: #fafafa;
-  padding: 8px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-
-  --p: 0;
-  opacity: calc(var(--p) * 4);
-  /* Fades in fast */
-
-  transform: translate(calc(-50% + var(--tx) * var(--p)),
-      calc(-50% + var(--ty) * var(--p) + (1 - var(--p)) * 60vh)) rotate(calc(var(--trot) * var(--p) + var(--irot) * (1 - var(--p)))) scale(calc(1 + (1 - var(--p)) * 0.4));
-}
-
-.pict-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-}
-
-/* Individual Picture Positions (Target offset and rotation) */
-.pict-01 {
-  --tx: 30px;
-  --ty: 80px;
-  --trot: -4deg;
-  --irot: -12deg;
-  z-index: 9;
-}
-
-.pict-02 {
-  --tx: -40px;
-  --ty: 60px;
-  --trot: 8deg;
-  --irot: 10deg;
-  z-index: 8;
-}
-
-.pict-03 {
-  --tx: 25px;
-  --ty: -15px;
-  --trot: 3deg;
-  --irot: -5deg;
-  z-index: 7;
-}
-
-.pict-04 {
-  --tx: 70px;
-  --ty: 30px;
-  --trot: -5deg;
-  --irot: 7deg;
-  z-index: 6;
-}
-
-.pict-05 {
-  --tx: -85px;
-  --ty: 5px;
-  --trot: 2deg;
-  --irot: -8deg;
-  z-index: 5;
-}
-
-.pict-06 {
-  --tx: -35px;
-  --ty: -35px;
-  --trot: -10deg;
-  --irot: 9deg;
-  z-index: 4;
-}
-
-.pict-07 {
-  --tx: 65px;
-  --ty: -60px;
-  --trot: 6deg;
-  --irot: -6deg;
-  z-index: 3;
-}
-
-.pict-08 {
-  --tx: -65px;
-  --ty: -85px;
-  --trot: -4deg;
-  --irot: 11deg;
-  z-index: 2;
-}
-
-.pict-09 {
-  --tx: 10px;
-  --ty: -110px;
-  --trot: 4deg;
-  --irot: -9deg;
-  z-index: 1;
-}
-
-.moment-footer-block {
-  position: absolute;
-  bottom: 50px;
-  width: 100%;
-  max-width: 404px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 4;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  pointer-events: none;
-}
-
-.moment-footer-block.visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.moment-gift-text {
-  font-family: 'Inter Tight', sans-serif;
-  font-weight: 300;
-  font-size: 12.83px;
-  line-height: 1.5;
-  text-align: center;
-  color: #ffffff;
-  letter-spacing: -0.128px;
-  margin-bottom: 25px;
-}
-
-.btn-gift {
-  border-radius: 91.67px;
-  background-color: #fafafa;
-  color: #010101;
-  border: 0.917px solid #fafafa;
-  font-size: 11px;
-  padding: 7.33px 18.33px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-gift:hover {
-  background-color: transparent;
-  color: #fafafa;
-  transform: translateY(-1px);
-}
-
-/* ==========================================================================
-   Lightbox Gallery Modal
-   ========================================================================== */
-.lightbox-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.95);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-.lightbox-modal.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.lightbox-slider {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Hide scrollbar for slider */
-.lightbox-slider::-webkit-scrollbar {
-  display: none;
-}
-
-.lightbox-slider {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.lightbox-slide {
-  flex: 0 0 100%;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  scroll-snap-align: center;
-  padding: 20px;
-}
-
-.lightbox-slide img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  border-radius: 8px;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
-  user-select: none;
-}
-
-.lightbox-close {
-  position: absolute;
-  top: 25px;
-  right: 25px;
-  background: none;
-  border: none;
-  color: #fafafa;
-  font-size: 40px;
-  cursor: pointer;
-  z-index: 10;
-  line-height: 1;
-  padding: 10px;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.lightbox-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.1);
-  color: #fafafa;
-  border: none;
-  font-size: 20px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  transition: background 0.3s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.lightbox-nav:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.lightbox-prev {
-  left: 15px;
-}
-
-.lightbox-next {
-  right: 15px;
-}
-
-@media (max-width: 768px) {
-
-  .lightbox-prev,
-  .lightbox-next {
-    display: none;
-    /* Rely on swiping for mobile */
   }
 }

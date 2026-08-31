@@ -24,7 +24,7 @@
 <body>
 
   <!-- ==========================================================================
-       1. Welcome Cover Screen (Landing Page Cover)
+       1. Welcome Cover Screen
        ========================================================================== -->
   <main class="welcome-container" id="welcomeCover">
     <div class="overlay"></div>
@@ -51,22 +51,16 @@
             <!-- 3D WebGL Canvas for Rotating Cincin -->
             <canvas id="cincinCanvas" class="rings-3d-canvas"></canvas>
             <!-- Fallback Image if WebGL is disabled -->
-            <img src="rings2.png" alt="Rings Icon" class="rings-icon fallback-ring" style="display: none;">
+            <img src="cincin.png" alt="Rings Icon" class="rings-icon fallback-ring" style="display: none;">
           </div>
 
           <span class="groom-bride-name">Fachrul</span>
         </div>
 
         <!-- Date -->
-        <div class="wedding-date animate-fade-in" style="--delay: 3;">
-          <span>SABTU</span>
-          <span class="date-dot"></span>
-          <span>03</span>
-          <span class="date-dot"></span>
-          <span>10</span>
-          <span class="date-dot"></span>
-          <span>2026</span>
-        </div>
+        <p class="wedding-date animate-fade-in" style="--delay: 3;">
+          SABTU &bull; 03 &bull; 10 &bull; 2026
+        </p>
 
         <!-- Open Invitation Button -->
         <div class="button-wrapper animate-fade-in" style="--delay: 4;">
@@ -78,11 +72,7 @@
 
       <!-- Bottom Footer Section -->
       <footer class="footer-section animate-fade-in" style="--delay: 5;">
-        <div class="footer-logo-container">
-          <div class="footer-logo-ring1"></div>
-          <div class="footer-logo-ring2"></div>
-          <img src="logo_new.svg" alt="Tasya & Fachrul Monogram" class="footer-logo-icon">
-        </div>
+        <img src="logo.png" alt="Tasya & Fachrul Monogram" class="footer-logo">
       </footer>
 
     </div>
@@ -94,7 +84,7 @@
        ========================================================================== -->
   <div class="homepage-container" id="homepageContainer" style="display: none;">
 
-    <!-- Left Side: Static Content Frame (Desktop only, fixed panel) -->
+    <!-- Left Side: Static Content Frame (Desktop only, remains in same position) -->
     <aside class="static-content-frame">
       <div class="static-bg-image">
         <img src="static_bg.png" alt="Static Wedding Background" class="static-img">
@@ -114,7 +104,7 @@
            ---------------------------------------------------------------------- -->
       <section class="hp-section hero-hp-section">
         <div class="hero-hp-bg">
-          <img src="bg_hero.png" alt="Fachrul & Tasya" class="hero-hp-img">
+          <img src="hero_bg.png" alt="Fachrul & Tasya" class="hero-hp-img">
           <div class="hero-hp-overlay"></div>
         </div>
 
@@ -141,7 +131,7 @@
           <p class="hero-subtitle">We’re Getting Married</p>
 
           <!-- Bottom Scroll Indicator -->
-          <div class="scroll-down-wrapper scroll-down-pill">
+          <div class="scroll-down-wrapper">
             <div class="scroll-down-outer">
               <div class="scroll-down-inner">
                 <img src="scroll_down.svg" alt="Scroll Down" class="scroll-down-icon">
@@ -174,7 +164,7 @@
            ---------------------------------------------------------------------- -->
       <section class="hp-section couple-hp-section bride-hp-section">
         <div class="couple-bg">
-          <img src="groom_bg.png" alt="Bride Background" class="couple-bg-img">
+          <img src="bride_bg.png" alt="Bride Background" class="couple-bg-img">
           <div class="couple-bg-overlay"></div>
         </div>
 
@@ -268,13 +258,13 @@
 
 
       <!-- ----------------------------------------------------------------------
-           Section E: The Date Section (Figma Node 11835-15781 / 11835-201)
+           Section E: The Date Section (Figma Node 11818-73820)
            ---------------------------------------------------------------------- -->
       <section class="hp-section date-hp-section" id="dateSection">
         <!-- Static Image Background for Date Section -->
         <div class="bg-date-sticky-container">
           <div class="bg-date-image-wrapper">
-            <img src="bg_date.png" alt="Date Background" class="bg-date-img">
+            <img src="IMG_2341.JPG.jpeg" alt="Date Background" class="bg-date-img">
             <div class="bg-date-overlay"></div>
           </div>
         </div>
@@ -398,68 +388,9 @@
         </div>
       </section>
 
-      <!-- ----------------------------------------------------------------------
-           Section F: Our Moment Section (Figma Node 11883-6)
-           ---------------------------------------------------------------------- -->
-      <section class="hp-section moment-hp-section" id="momentSection">
-        <div class="moment-sticky-container">
-          <!-- Background with Gradient Overlay -->
-          <div class="moment-bg-wrapper">
-            <img src="bg_moment.png" alt="Moment Background" class="moment-bg-img">
-            <div class="moment-bg-overlay"></div>
-          </div>
-
-          <!-- Top Header: OUR MOMENT -->
-          <div class="moment-header-block animate-opacity" style="--delay: 1;">
-            <span class="moment-header-line"></span>
-            <h2 class="moment-title">OUR MOMENT</h2>
-            <span class="moment-header-line"></span>
-          </div>
-
-          <!-- Photo Stack Center Wrapper -->
-          <div class="moment-photo-stack" id="photoStack">
-            <div class="pict-frame pict-09"><img src="pict09.png" alt="Moment 9"></div>
-            <div class="pict-frame pict-08"><img src="pict08.png" alt="Moment 8"></div>
-            <div class="pict-frame pict-07"><img src="pict07.png" alt="Moment 7"></div>
-            <div class="pict-frame pict-06"><img src="pict06.png" alt="Moment 6"></div>
-            <div class="pict-frame pict-05"><img src="pict05.png" alt="Moment 5"></div>
-            <div class="pict-frame pict-04"><img src="pict04.png" alt="Moment 4"></div>
-            <div class="pict-frame pict-03"><img src="pict03.png" alt="Moment 3"></div>
-            <div class="pict-frame pict-02"><img src="pict02.png" alt="Moment 2"></div>
-            <div class="pict-frame pict-01"><img src="pict01.png" alt="Moment 1"></div>
-          </div>
-
-          <!-- Bottom Footer: WEDDING GIFT -->
-          <div class="moment-footer-block" id="momentFooter">
-            <div class="moment-header-block gift-header">
-              <span class="moment-header-line"></span>
-              <h2 class="moment-title">WEDDING GIFT</h2>
-              <span class="moment-header-line"></span>
-            </div>
-            <p class="moment-gift-text">
-              Doa Restu Anda merupakan<br>
-              karunia yang sangat berarti bagi kami.<br><br>
-              Dan jika memberi adalah ungkapan tanda kasih, Anda dapat memberi melalui dibawah ini.
-            </p>
-            <button class="btn-location btn-gift">Klik Disini</button>
-          </div>
-        </div>
-      </section>
-
     </main>
   </div>
 
-  <!-- ==========================================================================
-       Lightbox Gallery Modal
-       ========================================================================== -->
-  <div class="lightbox-modal" id="lightboxModal">
-    <button class="lightbox-close" id="lightboxClose">&times;</button>
-    <button class="lightbox-nav lightbox-prev" id="lightboxPrev">&#10094;</button>
-    <button class="lightbox-nav lightbox-next" id="lightboxNext">&#10095;</button>
-    <div class="lightbox-slider" id="lightboxSlider">
-      <!-- Images injected via JS -->
-    </div>
-  </div>
 
   <!-- ==========================================================================
        Scripts & Interactions
@@ -654,185 +585,6 @@
         if (dateSec) {
           dateSec.scrollIntoView({ behavior: 'smooth' });
         }
-      });
-    }
-
-    // ==========================================================================
-    // Parallax Effect for Date Background
-    // ==========================================================================
-    const mainContentFrame = document.getElementById('mainContentFrame');
-    const bgDateWrapper = document.querySelector('.bg-date-image-wrapper');
-    const dateSection = document.getElementById('dateSection');
-
-    if (mainContentFrame && bgDateWrapper && dateSection) {
-      let ticking = false;
-      function updateParallax() {
-        const rect = dateSection.getBoundingClientRect();
-        const viewportHeight = mainContentFrame.clientHeight || window.innerHeight;
-        
-        if (rect.top <= viewportHeight && rect.bottom >= 0) {
-          const totalScroll = viewportHeight + rect.height;
-          const currentScroll = viewportHeight - rect.top;
-          const progress = currentScroll / totalScroll;
-          
-          const yOffset = progress * 25; 
-          bgDateWrapper.style.transform = `translateY(${yOffset}%)`;
-        }
-        ticking = false;
-      }
-      
-      mainContentFrame.addEventListener('scroll', function() {
-        if (!ticking) {
-          window.requestAnimationFrame(updateParallax);
-          ticking = true;
-        }
-      });
-      window.addEventListener('resize', updateParallax);
-      // Initialize once
-      setTimeout(updateParallax, 100);
-    }
-
-    // ==========================================================================
-    // Scroll Interaction for Moment Photo Stack
-    // ==========================================================================
-    const momentSection = document.getElementById('momentSection');
-    const photoStack = document.getElementById('photoStack');
-    const momentFooter = document.getElementById('momentFooter');
-    
-    if (mainContentFrame && momentSection && photoStack) {
-      let momentTicking = false;
-      
-      const pictFrames = [
-        document.querySelector('.pict-09'),
-        document.querySelector('.pict-08'),
-        document.querySelector('.pict-07'),
-        document.querySelector('.pict-06'),
-        document.querySelector('.pict-05'),
-        document.querySelector('.pict-04'),
-        document.querySelector('.pict-03'),
-        document.querySelector('.pict-02'),
-        document.querySelector('.pict-01')
-      ];
-
-      function updateMomentScroll() {
-        const rect = momentSection.getBoundingClientRect();
-        const viewportHeight = mainContentFrame.clientHeight || window.innerHeight;
-        
-        // Check if moment section is active
-        if (rect.top <= 0 && rect.bottom >= viewportHeight) {
-          const totalScroll = rect.height - viewportHeight;
-          const currentScroll = -rect.top;
-          
-          let progress = currentScroll / totalScroll;
-          progress = Math.max(0, Math.min(1, progress));
-          
-          pictFrames.forEach((frame, index) => {
-            if (!frame) return;
-            const start = index * 0.09;
-            const end = start + 0.15;
-            let p = (progress - start) / (end - start);
-            p = Math.max(0, Math.min(1, p));
-            frame.style.setProperty('--p', p);
-          });
-          
-          if (progress > 0.85) {
-            momentFooter.classList.add('visible');
-          } else {
-            momentFooter.classList.remove('visible');
-          }
-        } else if (rect.top > 0) {
-          pictFrames.forEach(frame => frame && frame.style.setProperty('--p', 0));
-          momentFooter.classList.remove('visible');
-        } else if (rect.bottom < viewportHeight) {
-          pictFrames.forEach(frame => frame && frame.style.setProperty('--p', 1));
-          momentFooter.classList.add('visible');
-        }
-        
-        momentTicking = false;
-      }
-      
-      mainContentFrame.addEventListener('scroll', function() {
-        if (!momentTicking) {
-          window.requestAnimationFrame(updateMomentScroll);
-          momentTicking = true;
-        }
-      });
-      window.addEventListener('resize', updateMomentScroll);
-      setTimeout(updateMomentScroll, 100);
-    }
-
-    // ==========================================================================
-    // Lightbox Gallery Interaction
-    // ==========================================================================
-    const lightboxModal = document.getElementById('lightboxModal');
-    const lightboxSlider = document.getElementById('lightboxSlider');
-    const lightboxClose = document.getElementById('lightboxClose');
-    const lightboxPrev = document.getElementById('lightboxPrev');
-    const lightboxNext = document.getElementById('lightboxNext');
-    const pictFrames = document.querySelectorAll('.pict-frame');
-    
-    if (lightboxModal && pictFrames.length > 0) {
-      // Collect images in correct chronological order (1 to 9) 
-      // DOM is ordered 9 to 1 for stacking context, so we reverse it.
-      const images = Array.from(pictFrames).reverse().map(frame => frame.querySelector('img').src);
-      
-      // Populate slider
-      images.forEach(src => {
-        const slide = document.createElement('div');
-        slide.className = 'lightbox-slide';
-        const img = document.createElement('img');
-        img.src = src;
-        slide.appendChild(img);
-        lightboxSlider.appendChild(slide);
-      });
-      
-      // Open Lightbox on Click
-      pictFrames.forEach(frame => {
-        frame.style.cursor = 'pointer';
-        frame.addEventListener('click', () => {
-          const src = frame.querySelector('img').src;
-          const index = images.indexOf(src);
-          
-          lightboxModal.classList.add('active');
-          
-          // Disable smooth scrolling temporarily to jump to the right slide immediately
-          lightboxSlider.style.scrollBehavior = 'auto';
-          
-          // Scroll to the targeted slide
-          setTimeout(() => {
-            const targetSlide = lightboxSlider.children[index];
-            if (targetSlide) {
-              lightboxSlider.scrollTo({
-                left: targetSlide.offsetLeft,
-                behavior: 'auto'
-              });
-            }
-            // Restore smooth scrolling for subsequent swipes/clicks
-            setTimeout(() => {
-              lightboxSlider.style.scrollBehavior = 'smooth';
-            }, 50);
-          }, 10);
-        });
-      });
-      
-      // Close Lightbox
-      lightboxClose.addEventListener('click', () => {
-        lightboxModal.classList.remove('active');
-      });
-      
-      lightboxModal.addEventListener('click', (e) => {
-        if (e.target === lightboxModal || e.target.classList.contains('lightbox-slide')) {
-          lightboxModal.classList.remove('active');
-        }
-      });
-      
-      // Navigation Buttons
-      lightboxPrev.addEventListener('click', () => {
-        lightboxSlider.scrollBy({ left: -lightboxSlider.clientWidth, behavior: 'smooth' });
-      });
-      
-      lightboxNext.addEventListener('click', () => {
-        lightboxSlider.scrollBy({ left: lightboxSlider.clientWidth, behavior: 'smooth' });
       });
     }
   </script>
