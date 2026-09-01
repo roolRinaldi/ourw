@@ -32,6 +32,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   touch-action: manipulation;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+html {
+  overscroll-behavior: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img,
+svg,
+canvas {
+  max-width: 100%;
 }
 
 /* ==========================================================================
@@ -70,7 +87,7 @@ body {
   width: 92%;
   max-width: 440px;
   /* Aligned to Figma specs for mobile proportions */
-  height: 100vh;
+  height: var(--app-height, 100vh);
   height: 100dvh;
   margin: 0 auto;
   display: flex;
@@ -363,7 +380,7 @@ body {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: var(--app-height, 100vh);
   height: 100dvh;
   background-color: #000000;
   overflow: hidden;
@@ -378,7 +395,7 @@ body {
   left: 0;
   top: 0;
   width: calc(100vw - 440px);
-  height: 100vh;
+  height: var(--app-height, 100vh);
   height: 100dvh;
   overflow: hidden;
   z-index: 1;
@@ -442,8 +459,9 @@ body {
   right: 0;
   top: 0;
   width: 440px;
-  height: 100vh;
+  height: var(--app-height, 100vh);
   height: 100dvh;
+  overscroll-behavior-y: contain;
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 2;
@@ -934,38 +952,46 @@ body {
 /* ==========================================================================
    E. The Date Section Styling (Figma Specs: Node 11835-15781 / 11835-201)
    ========================================================================== */
+.collect-section {
+  position: relative;
+  isolation: isolate;
+  background: #000;
+}
+
+.collect-bg {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: var(--app-height, 100vh);
+  height: 100dvh;
+  margin-bottom: calc(-1 * var(--app-height, 100vh));
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .date-hp-section {
   position: relative;
   width: 100%;
   min-height: 923px;
-  background-color: #000000;
+  background-color: transparent;
   color: #fafafa;
   padding: 73.33px 18.33px;
-  overflow: hidden;
+  /* A non-scrolling overflow ancestor prevents the date capsule's sticky
+     interaction in Safari and other mobile browsers. */
+  overflow: visible;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 /* Static Background Image Container for Date Section */
-.bg-date-sticky-container {
+.bg-date-image-wrapper {
   position: absolute;
-  top: 0;
+  inset: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.bg-date-image-wrapper {
-  position: absolute;
-  top: -25%;
-  left: 0;
-  width: 100%;
-  height: 150%;
-  will-change: transform;
 }
 
 .bg-date-img {
@@ -984,7 +1010,7 @@ body {
 
 .date-content-wrapper {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   width: 100%;
   max-width: 403.33px;
   display: flex;
@@ -1123,16 +1149,21 @@ body {
   width: 100%;
   gap: 18px;
   position: relative;
+  /* The wrapper's height is the lower boundary for the sticky capsule. */
+  overflow: visible;
 }
 
 /* Sticky Date Capsule Container */
 .date-capsule-sticky-container {
+  position: -webkit-sticky;
   position: sticky;
-  top: 30px;
+  top: max(30px, env(safe-area-inset-top, 30px));
   flex-shrink: 0;
   width: 103.58px;
   z-index: 3;
   align-self: flex-start;
+  height: fit-content;
+  will-change: transform;
 }
 
 .date-capsule-card {
@@ -1324,6 +1355,11 @@ body {
    Responsive Mobile Setup (max-width: 768px, 480px, 390px, 375px, 320px)
    ========================================================================== */
 @media (max-width: 768px) {
+  .welcome-container {
+    /* `fixed` backgrounds repaint incorrectly during scroll in iOS Safari. */
+    background-attachment: scroll;
+  }
+
   .static-content-frame {
     display: none !important;
   }
@@ -1335,6 +1371,8 @@ body {
     width: 100% !important;
     max-width: 100% !important;
     box-shadow: none;
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
   }
 
   .framed-photo-container {
@@ -1389,6 +1427,17 @@ body {
     gap: 12px;
   }
 
+  .hero-hp-section {
+    padding-left: max(16px, env(safe-area-inset-left, 16px));
+    padding-right: max(16px, env(safe-area-inset-right, 16px));
+  }
+
+  .date-hp-section,
+  .gift-hp-section {
+    padding-left: max(14px, env(safe-area-inset-left, 14px));
+    padding-right: max(14px, env(safe-area-inset-right, 14px));
+  }
+
   .date-capsule-sticky-container {
     width: 90px;
   }
@@ -1409,16 +1458,33 @@ body {
   }
 
   .cd-unit {
-    width: 65px;
+    width: auto;
+    min-width: 0;
+    flex: 1 1 0;
   }
 
   .cd-number,
   .cd-colon {
-    font-size: 35px;
+    font-size: clamp(29px, 9vw, 35px);
+  }
+
+  .countdown-wrapper {
+    gap: clamp(3px, 1.5vw, 8px);
   }
 }
 
 @media (max-width: 375px) {
+  .pre-header-text {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    margin-right: 6px;
+    margin-left: 6px;
+  }
+
+  .pre-header .line {
+    min-width: 12px;
+  }
+
   .groom-bride-name {
     font-size: 2.3rem;
   }
@@ -1429,6 +1495,73 @@ body {
 
   .hero-ampersand {
     font-size: 68px;
+  }
+
+  .bride-hp-section,
+  .groom-hp-section {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .framed-photo-container {
+    height: 300px;
+  }
+
+  .photo-border-box {
+    width: calc(100% - 52px);
+    height: 300px;
+    margin-left: 52px;
+  }
+
+  .groom-photo-container .photo-border-box {
+    margin-left: 0;
+  }
+
+  .event-section-wrapper {
+    gap: 9px;
+  }
+
+  .date-capsule-sticky-container,
+  .date-capsule-card,
+  .capsule-outer-border {
+    width: 78px;
+  }
+
+  .capsule-inner-border {
+    width: 70px;
+  }
+}
+
+/* Short mobile viewports and landscape phones. */
+@media (max-height: 600px) and (max-width: 932px) {
+  .header-section {
+    margin-top: max(24px, env(safe-area-inset-top, 24px));
+  }
+
+  .footer-section {
+    margin-bottom: max(24px, env(safe-area-inset-bottom, 24px));
+  }
+
+  .moment-header-block {
+    top: max(24px, env(safe-area-inset-top, 24px));
+  }
+
+  .gift-header {
+    top: auto;
+  }
+
+  .moment-photo-stack {
+    height: min(68dvh, 340px);
+  }
+
+  .pict-frame {
+    width: 135px;
+    height: 180px;
+  }
+
+  .lightbox-close {
+    top: max(4px, env(safe-area-inset-top, 4px));
+    right: max(4px, env(safe-area-inset-right, 4px));
   }
 }
 
@@ -1450,9 +1583,9 @@ body {
 .moment-hp-section {
   position: relative;
   width: 100%;
-  height: 300vh;
+  height: 200vh;
   /* High height to allow for scroll duration */
-  background-color: #000000;
+  background-color: transparent;
   color: #fafafa;
 }
 
@@ -1460,12 +1593,33 @@ body {
   position: sticky;
   top: 0;
   width: 100%;
-  height: 100vh;
+  height: var(--app-height, 100vh);
+  height: 100dvh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.gift-hp-section {
+  position: relative;
+  z-index: 1;
+  min-height: 0vh;
+  padding: 23.33px 18.33px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #fafafa;
+}
+
+.gift-content-wrapper {
+  width: 100%;
+  max-width: 403.33px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .moment-bg-wrapper {
@@ -1673,12 +1827,164 @@ body {
   padding: 7.33px 18.33px;
   cursor: pointer;
   transition: all 0.3s ease;
+  gap: 10px;
 }
 
 .btn-gift:hover {
   background-color: transparent;
   color: #fafafa;
   transform: translateY(-1px);
+}
+
+.gift-toggle-icon {
+  width: 6px;
+  height: 6px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.3s ease;
+}
+
+.btn-gift[aria-expanded="true"] .gift-toggle-icon {
+  transform: rotate(225deg) translate(-2px, -2px);
+}
+
+.gift-dropdown {
+  width: 100%;
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  margin-top: 0;
+  transition: grid-template-rows 0.45s ease, opacity 0.3s ease, margin-top 0.45s ease;
+}
+
+.gift-dropdown.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: 22px;
+}
+
+.gift-dropdown-inner {
+  min-height: 0;
+  overflow: hidden;
+  text-align: left;
+  border-top: 1px solid rgba(250, 250, 250, 0.9);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0 24px;
+  transition: padding 0.45s ease;
+}
+
+.gift-dropdown.open .gift-dropdown-inner {
+  padding: 18px 24px 24px;
+}
+
+.gift-detail-row {
+  padding: 18px 0 24px;
+  border-bottom: 1px solid rgba(250, 250, 250, 0.3);
+}
+
+.gift-detail-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.gift-bank-heading,
+.gift-bank-footer,
+.gift-address-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.gift-detail-label {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(250, 250, 250, 0.55);
+  white-space: nowrap;
+}
+
+.gift-account-number {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: clamp(18px, 24px);
+  font-weight: 400;
+  color: #fafafa;
+  white-space: nowrap;
+}
+
+.gift-bank-footer {
+  margin-top: 10px;
+}
+
+.gift-account-name {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: clamp(18px, 22px);
+  font-style: italic;
+  font-weight: 300;
+  color: #fafafa;
+}
+
+.gift-copy-btn {
+  flex: 0 0 auto;
+  padding: 6px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: #fafafa;
+  color: #010101;
+  font: 400 11px 'Inter Tight', sans-serif;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.gift-copy-btn:hover {
+  transform: translateY(-1px);
+  background: #e5e5e5;
+}
+
+.gift-address-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.gift-address-content {
+  width: 100%;
+  align-items: flex-start;
+}
+
+.gift-address {
+  margin: 0;
+  max-width: 235px;
+  text-align: right;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: clamp(18px, 22px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.35;
+  color: #fafafa;
+}
+
+.gift-address-copy {
+  margin-top: -28px;
+}
+
+@media (max-width: 390px) {
+  .gift-dropdown.open .gift-dropdown-inner {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .gift-bank-heading,
+  .gift-bank-footer {
+    gap: 8px;
+  }
+
+  .gift-detail-label {
+    font-size: 12px;
+  }
 }
 
 /* ==========================================================================

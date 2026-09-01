@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
   <meta name="description" content="Wedding Invitation - Tasya & Fachrul - Sabtu, 03 Oktober 2026">
   <title>The Wedding of Tasya & Fachrul</title>
 
@@ -174,7 +175,7 @@
            ---------------------------------------------------------------------- -->
       <section class="hp-section couple-hp-section bride-hp-section">
         <div class="couple-bg">
-          <img src="groom_bg.png" alt="Bride Background" class="couple-bg-img">
+          <img src="bride_bg.png" alt="Bride Background" class="couple-bg-img">
           <div class="couple-bg-overlay"></div>
         </div>
 
@@ -270,167 +271,167 @@
       <!-- ----------------------------------------------------------------------
            Section E: The Date Section (Figma Node 11835-15781 / 11835-201)
            ---------------------------------------------------------------------- -->
-      <section class="hp-section date-hp-section" id="dateSection">
-        <!-- Static Image Background for Date Section -->
-        <div class="bg-date-sticky-container">
+      <div class="collect-section" id="collectSection">
+        <!-- One shared background for Date, Moment, and Gift. It stays pinned while
+             the complete collect section moves through the viewport. -->
+        <div class="collect-bg" aria-hidden="true">
           <div class="bg-date-image-wrapper">
-            <img src="bg_date.png" alt="Date Background" class="bg-date-img">
+            <img src="bg_date.png" alt="" class="bg-date-img">
             <div class="bg-date-overlay"></div>
           </div>
         </div>
 
-        <div class="date-content-wrapper">
-          <!-- Section Title, Countdown & Save the Date -->
-          <div class="date-header-block">
-            <div class="date-title-row">
-              <span class="date-header-line"></span>
-              <h2 class="date-title">THE DATE</h2>
-              <span class="date-header-line"></span>
+        <section class="hp-section date-hp-section" id="dateSection">
+
+          <div class="date-content-wrapper">
+            <!-- Section Title, Countdown & Save the Date -->
+            <div class="date-header-block">
+              <div class="date-title-row">
+                <span class="date-header-line"></span>
+                <h2 class="date-title">THE DATE</h2>
+                <span class="date-header-line"></span>
+              </div>
+
+              <!-- Countdown Timer -->
+              <div class="countdown-wrapper" id="countdownWrapper">
+                <div class="cd-unit">
+                  <span class="cd-number" id="cdDays">00</span>
+                  <div class="cd-line"></div>
+                  <span class="cd-label">Hari</span>
+                </div>
+                <span class="cd-colon">:</span>
+                <div class="cd-unit">
+                  <span class="cd-number" id="cdHours">00</span>
+                  <div class="cd-line"></div>
+                  <span class="cd-label">Jam</span>
+                </div>
+                <span class="cd-colon">:</span>
+                <div class="cd-unit">
+                  <span class="cd-number" id="cdMinutes">00</span>
+                  <div class="cd-line"></div>
+                  <span class="cd-label">Menit</span>
+                </div>
+                <span class="cd-colon">:</span>
+                <div class="cd-unit">
+                  <span class="cd-number" id="cdSeconds">00</span>
+                  <div class="cd-line"></div>
+                  <span class="cd-label">Detik</span>
+                </div>
+              </div>
+
+              <!-- Save the Date Button -->
+              <div class="save-date-row">
+                <span class="save-date-line"></span>
+                <button type="button" class="btn-save-date" id="saveDateBtn">Save the Date</button>
+                <span class="save-date-line"></span>
+              </div>
             </div>
 
-            <!-- Countdown Timer -->
-            <div class="countdown-wrapper" id="countdownWrapper">
-              <div class="cd-unit">
-                <span class="cd-number" id="cdDays">00</span>
-                <div class="cd-line"></div>
-                <span class="cd-label">Hari</span>
-              </div>
-              <span class="cd-colon">:</span>
-              <div class="cd-unit">
-                <span class="cd-number" id="cdHours">00</span>
-                <div class="cd-line"></div>
-                <span class="cd-label">Jam</span>
-              </div>
-              <span class="cd-colon">:</span>
-              <div class="cd-unit">
-                <span class="cd-number" id="cdMinutes">00</span>
-                <div class="cd-line"></div>
-                <span class="cd-label">Menit</span>
-              </div>
-              <span class="cd-colon">:</span>
-              <div class="cd-unit">
-                <span class="cd-number" id="cdSeconds">00</span>
-                <div class="cd-line"></div>
-                <span class="cd-label">Detik</span>
-              </div>
-            </div>
+            <!-- Event Section: Date Capsule Sticky Container (Left) & Event List (Right) -->
+            <div class="event-section-wrapper">
 
-            <!-- Save the Date Button -->
-            <div class="save-date-row">
-              <span class="save-date-line"></span>
-              <button type="button" class="btn-save-date" id="saveDateBtn">Save the Date</button>
-              <span class="save-date-line"></span>
-            </div>
-          </div>
-
-          <!-- Event Section: Date Capsule Sticky Container (Left) & Event List (Right) -->
-          <div class="event-section-wrapper">
-
-            <!-- Left Column: Date Capsule Frame (Sticky until end of event_date frame) -->
-            <div class="date-capsule-sticky-container">
-              <div class="date-capsule-card">
-                <div class="capsule-outer-border">
-                  <div class="capsule-inner-border">
-                    <div class="capsule-content">
-                      <span class="capsule-day-name">Sabtu</span>
-                      <div class="capsule-divider"></div>
-                      <span class="capsule-day-num">03</span>
-                      <span class="capsule-month-name">okt</span>
+              <!-- Left Column: Date Capsule Frame (Sticky until end of event_date frame) -->
+              <div class="date-capsule-sticky-container">
+                <div class="date-capsule-card">
+                  <div class="capsule-outer-border">
+                    <div class="capsule-inner-border">
+                      <div class="capsule-content">
+                        <span class="capsule-day-name">Sabtu</span>
+                        <div class="capsule-divider"></div>
+                        <span class="capsule-day-num">03</span>
+                        <span class="capsule-month-name">okt</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <!-- Right Column: event_date Frame (Akad & Resepsi) -->
-            <div class="event-date-list">
+              <!-- Right Column: event_date Frame (Akad & Resepsi) -->
+              <div class="event-date-list">
 
-              <!-- AKAD Card -->
-              <div class="event-card-item">
-                <div class="event-card-header">
-                  <h3 class="event-type-title">AKAD</h3>
-                  <div class="event-header-line"></div>
+                <!-- AKAD Card -->
+                <div class="event-card-item">
+                  <div class="event-card-header">
+                    <h3 class="event-type-title">AKAD</h3>
+                    <div class="event-header-line"></div>
+                  </div>
+
+                  <div class="event-card-body">
+                    <div class="event-time-row">
+                      <span class="event-time-value">07.30</span>
+                      <span class="event-time-tz">Wib</span>
+                    </div>
+                    <div class="event-venue">
+                      <h4 class="event-venue-name">Masjid Al-Haadii Mustaqiim</h4>
+                      <p class="event-venue-address">Tipes, Kec. Laweyan, Surakarta, Jawa Tengah</p>
+                    </div>
+                    <a href="https://maps.google.com/?q=Masjid+Al-Haadii+Mustaqiim+Tipes+Surakarta" target="_blank"
+                      rel="noopener noreferrer" class="btn-location">
+                      Lihat Lokasi
+                    </a>
+                  </div>
                 </div>
 
-                <div class="event-card-body">
-                  <div class="event-time-row">
-                    <span class="event-time-value">07.30</span>
-                    <span class="event-time-tz">Wib</span>
+                <!-- RESEPSI Card -->
+                <div class="event-card-item">
+                  <div class="event-card-header">
+                    <h3 class="event-type-title">RESEPSI</h3>
+                    <div class="event-header-line"></div>
                   </div>
-                  <div class="event-venue">
-                    <h4 class="event-venue-name">Masjid Al-Haadii Mustaqiim</h4>
-                    <p class="event-venue-address">Tipes, Kec. Laweyan, Surakarta, Jawa Tengah</p>
-                  </div>
-                  <a href="https://maps.google.com/?q=Masjid+Al-Haadii+Mustaqiim+Tipes+Surakarta" target="_blank"
-                    rel="noopener noreferrer" class="btn-location">
-                    Lihat Lokasi
-                  </a>
-                </div>
-              </div>
 
-              <!-- RESEPSI Card -->
-              <div class="event-card-item">
-                <div class="event-card-header">
-                  <h3 class="event-type-title">RESEPSI</h3>
-                  <div class="event-header-line"></div>
+                  <div class="event-card-body">
+                    <div class="event-time-row">
+                      <span class="event-time-value">09.30</span>
+                      <span class="event-time-tz">Wib</span>
+                    </div>
+                    <div class="event-venue">
+                      <h4 class="event-venue-name">Ndalem Marsum</h4>
+                      <p class="event-venue-address">Tipes, Kec. Laweyan, Surakarta, Jawa Tengah</p>
+                    </div>
+                    <a href="https://maps.google.com/?q=Ndalem+Marsum+Tipes+Surakarta" target="_blank"
+                      rel="noopener noreferrer" class="btn-location">
+                      Lihat Lokasi
+                    </a>
+                  </div>
                 </div>
 
-                <div class="event-card-body">
-                  <div class="event-time-row">
-                    <span class="event-time-value">09.30</span>
-                    <span class="event-time-tz">Wib</span>
-                  </div>
-                  <div class="event-venue">
-                    <h4 class="event-venue-name">Ndalem Marsum</h4>
-                    <p class="event-venue-address">Tipes, Kec. Laweyan, Surakarta, Jawa Tengah</p>
-                  </div>
-                  <a href="https://maps.google.com/?q=Ndalem+Marsum+Tipes+Surakarta" target="_blank"
-                    rel="noopener noreferrer" class="btn-location">
-                    Lihat Lokasi
-                  </a>
-                </div>
               </div>
 
             </div>
 
           </div>
+        </section>
 
-        </div>
-      </section>
-
-      <!-- ----------------------------------------------------------------------
+        <!-- ----------------------------------------------------------------------
            Section F: Our Moment Section (Figma Node 11883-6)
            ---------------------------------------------------------------------- -->
-      <section class="hp-section moment-hp-section" id="momentSection">
-        <div class="moment-sticky-container">
-          <!-- Background with Gradient Overlay -->
-          <div class="moment-bg-wrapper">
-            <img src="bg_moment.png" alt="Moment Background" class="moment-bg-img">
-            <div class="moment-bg-overlay"></div>
-          </div>
+        <section class="hp-section moment-hp-section" id="momentSection">
+          <div class="moment-sticky-container">
+            <!-- Top Header: OUR MOMENT -->
+            <div class="moment-header-block animate-opacity" style="--delay: 1;">
+              <span class="moment-header-line"></span>
+              <h2 class="moment-title">OUR MOMENT</h2>
+              <span class="moment-header-line"></span>
+            </div>
 
-          <!-- Top Header: OUR MOMENT -->
-          <div class="moment-header-block animate-opacity" style="--delay: 1;">
-            <span class="moment-header-line"></span>
-            <h2 class="moment-title">OUR MOMENT</h2>
-            <span class="moment-header-line"></span>
-          </div>
+            <!-- Photo Stack Center Wrapper -->
+            <div class="moment-photo-stack" id="photoStack">
+              <div class="pict-frame pict-09"><img src="pict09.png" alt="Moment 9"></div>
+              <div class="pict-frame pict-08"><img src="pict08.png" alt="Moment 8"></div>
+              <div class="pict-frame pict-07"><img src="pict07.png" alt="Moment 7"></div>
+              <div class="pict-frame pict-06"><img src="pict06.png" alt="Moment 6"></div>
+              <div class="pict-frame pict-05"><img src="pict05.png" alt="Moment 5"></div>
+              <div class="pict-frame pict-04"><img src="pict04.png" alt="Moment 4"></div>
+              <div class="pict-frame pict-03"><img src="pict03.png" alt="Moment 3"></div>
+              <div class="pict-frame pict-02"><img src="pict02.png" alt="Moment 2"></div>
+              <div class="pict-frame pict-01"><img src="pict01.png" alt="Moment 1"></div>
+            </div>
 
-          <!-- Photo Stack Center Wrapper -->
-          <div class="moment-photo-stack" id="photoStack">
-            <div class="pict-frame pict-09"><img src="pict09.png" alt="Moment 9"></div>
-            <div class="pict-frame pict-08"><img src="pict08.png" alt="Moment 8"></div>
-            <div class="pict-frame pict-07"><img src="pict07.png" alt="Moment 7"></div>
-            <div class="pict-frame pict-06"><img src="pict06.png" alt="Moment 6"></div>
-            <div class="pict-frame pict-05"><img src="pict05.png" alt="Moment 5"></div>
-            <div class="pict-frame pict-04"><img src="pict04.png" alt="Moment 4"></div>
-            <div class="pict-frame pict-03"><img src="pict03.png" alt="Moment 3"></div>
-            <div class="pict-frame pict-02"><img src="pict02.png" alt="Moment 2"></div>
-            <div class="pict-frame pict-01"><img src="pict01.png" alt="Moment 1"></div>
           </div>
+        </section>
 
-          <!-- Bottom Footer: WEDDING GIFT -->
-          <div class="moment-footer-block" id="momentFooter">
+        <section class="hp-section gift-hp-section" id="giftSection">
+          <div class="gift-content-wrapper">
             <div class="moment-header-block gift-header">
               <span class="moment-header-line"></span>
               <h2 class="moment-title">WEDDING GIFT</h2>
@@ -441,10 +442,50 @@
               karunia yang sangat berarti bagi kami.<br><br>
               Dan jika memberi adalah ungkapan tanda kasih, Anda dapat memberi melalui dibawah ini.
             </p>
-            <button class="btn-location btn-gift">Klik Disini</button>
-          </div>  
-        </div>
-      </section>
+             <button class="btn-location btn-gift" id="giftToggle" type="button" aria-expanded="false"
+              aria-controls="giftDropdown">
+              <span>Klik Disini</span>
+              <span class="gift-toggle-icon" aria-hidden="true"></span>
+            </button>
+
+            <div class="gift-dropdown" id="giftDropdown" aria-hidden="true">
+              <div class="gift-dropdown-inner">
+                <div class="gift-detail-row">
+                  <div class="gift-bank-heading">
+                    <span class="gift-detail-label">BANK BRI</span>
+                    <span class="gift-account-number">4207 0100 5085 532</span>
+                  </div>
+                  <div class="gift-bank-footer">
+                    <span class="gift-account-name">a.n FACHRUL RINALDI</span>
+                    <button class="gift-copy-btn" type="button" data-copy="420701005085532">Salin</button>
+                  </div>
+                </div>
+
+                <div class="gift-detail-row">
+                  <div class="gift-bank-heading">
+                    <span class="gift-detail-label">BANK BSI</span>
+                    <span class="gift-account-number">4207 0100 5085 532</span>
+                  </div>
+                  <div class="gift-bank-footer">
+                    <span class="gift-account-name">a.n TASYA FARAH PUTRI</span>
+                    <button class="gift-copy-btn" type="button" data-copy="420701005085532">Salin</button>
+                  </div>
+                </div>
+
+                <div class="gift-detail-row gift-address-row">
+                  <div class="gift-address-content">
+                    <span class="gift-detail-label">ALAMAT RUMAH</span>
+                    <address class="gift-address">PERUM MUTIARA<br>INDAH 4 BC.2, KUDU,<br>BAKI, SUKOHARJO,<br>JAWA
+                      TENGAH</address>
+                  </div>
+                  <button class="gift-copy-btn gift-address-copy" type="button"
+                    data-copy="PERUM MUTIARA INDAH 4 BC.2, KUDU, BAKI, SUKOHARJO, JAWA TENGAH">Salin Alamat</button>
+                </div>
+              </div>
+            </div>
+          </div>
+       </section>
+     </div>
 
     </main>
   </div>
@@ -465,6 +506,17 @@
        Scripts & Interactions
        ========================================================================== -->
   <script>
+    // Reliable viewport height fallback for older iOS/Android browsers that do
+    // not support dynamic viewport units.
+    (function setAppViewportHeight() {
+      function updateHeight() {
+        document.documentElement.style.setProperty('--app-height', window.innerHeight + 'px');
+      }
+      updateHeight();
+      window.addEventListener('resize', updateHeight, { passive: true });
+      window.addEventListener('orientationchange', updateHeight, { passive: true });
+    })();
+
     // Button Interaction to open Homepage
     document.getElementById('openBtn').addEventListener('click', function () {
       this.style.transform = 'scale(0.95)';
@@ -658,30 +710,27 @@
     }
 
     // ==========================================================================
-    // Parallax Effect for Date Background
+    // Shared Collect Background
     // ==========================================================================
     const mainContentFrame = document.getElementById('mainContentFrame');
     const bgDateWrapper = document.querySelector('.bg-date-image-wrapper');
-    const dateSection = document.getElementById('dateSection');
+    const dateSection = document.getElementById('collectSection');
 
     if (mainContentFrame && bgDateWrapper && dateSection) {
       let ticking = false;
       function updateParallax() {
         const rect = dateSection.getBoundingClientRect();
         const viewportHeight = mainContentFrame.clientHeight || window.innerHeight;
-        
+
         if (rect.top <= viewportHeight && rect.bottom >= 0) {
-          const totalScroll = viewportHeight + rect.height;
-          const currentScroll = viewportHeight - rect.top;
-          const progress = currentScroll / totalScroll;
-          
-          const yOffset = progress * 25; 
-          bgDateWrapper.style.transform = `translateY(${yOffset}%)`;
+          // The shared background is intentionally kept stationary for the whole
+          // Date + Moment + Gift collect section.
+          bgDateWrapper.style.transform = 'none';
         }
         ticking = false;
       }
-      
-      mainContentFrame.addEventListener('scroll', function() {
+
+      mainContentFrame.addEventListener('scroll', function () {
         if (!ticking) {
           window.requestAnimationFrame(updateParallax);
           ticking = true;
@@ -697,11 +746,10 @@
     // ==========================================================================
     const momentSection = document.getElementById('momentSection');
     const photoStack = document.getElementById('photoStack');
-    const momentFooter = document.getElementById('momentFooter');
-    
+
     if (mainContentFrame && momentSection && photoStack) {
       let momentTicking = false;
-      
+
       const pictFrames = [
         document.querySelector('.pict-09'),
         document.querySelector('.pict-08'),
@@ -717,15 +765,15 @@
       function updateMomentScroll() {
         const rect = momentSection.getBoundingClientRect();
         const viewportHeight = mainContentFrame.clientHeight || window.innerHeight;
-        
+
         // Check if moment section is active
         if (rect.top <= 0 && rect.bottom >= viewportHeight) {
           const totalScroll = rect.height - viewportHeight;
           const currentScroll = -rect.top;
-          
+
           let progress = currentScroll / totalScroll;
           progress = Math.max(0, Math.min(1, progress));
-          
+
           pictFrames.forEach((frame, index) => {
             if (!frame) return;
             const start = index * 0.09;
@@ -734,24 +782,17 @@
             p = Math.max(0, Math.min(1, p));
             frame.style.setProperty('--p', p);
           });
-          
-          if (progress > 0.85) {
-            momentFooter.classList.add('visible');
-          } else {
-            momentFooter.classList.remove('visible');
-          }
+
         } else if (rect.top > 0) {
           pictFrames.forEach(frame => frame && frame.style.setProperty('--p', 0));
-          momentFooter.classList.remove('visible');
         } else if (rect.bottom < viewportHeight) {
           pictFrames.forEach(frame => frame && frame.style.setProperty('--p', 1));
-          momentFooter.classList.add('visible');
         }
-        
+
         momentTicking = false;
       }
-      
-      mainContentFrame.addEventListener('scroll', function() {
+
+      mainContentFrame.addEventListener('scroll', function () {
         if (!momentTicking) {
           window.requestAnimationFrame(updateMomentScroll);
           momentTicking = true;
@@ -759,6 +800,44 @@
       });
       window.addEventListener('resize', updateMomentScroll);
       setTimeout(updateMomentScroll, 100);
+    }
+
+    // Gift Dropdown
+    const giftToggle = document.getElementById('giftToggle');
+    const giftDropdown = document.getElementById('giftDropdown');
+    if (giftToggle && giftDropdown) {
+      giftToggle.addEventListener('click', function () {
+        const isOpen = giftToggle.getAttribute('aria-expanded') === 'true';
+        giftToggle.setAttribute('aria-expanded', String(!isOpen));
+        giftDropdown.setAttribute('aria-hidden', String(isOpen));
+        giftDropdown.classList.toggle('open', !isOpen);
+      });
+
+      giftDropdown.querySelectorAll('.gift-copy-btn').forEach(function (button) {
+        button.addEventListener('click', async function () {
+          const value = button.dataset.copy;
+          const originalLabel = button.textContent;
+
+          try {
+            await navigator.clipboard.writeText(value);
+          } catch (error) {
+            const textArea = document.createElement('textarea');
+            textArea.value = value;
+            textArea.setAttribute('readonly', '');
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            textArea.remove();
+          }
+
+          button.textContent = 'Tersalin';
+          window.setTimeout(function () {
+            button.textContent = originalLabel;
+          }, 1600);
+        });
+      });
     }
 
     // ==========================================================================
@@ -770,12 +849,12 @@
     const lightboxPrev = document.getElementById('lightboxPrev');
     const lightboxNext = document.getElementById('lightboxNext');
     const pictFrames = document.querySelectorAll('.pict-frame');
-    
+
     if (lightboxModal && pictFrames.length > 0) {
       // Collect images in correct chronological order (1 to 9) 
       // DOM is ordered 9 to 1 for stacking context, so we reverse it.
       const images = Array.from(pictFrames).reverse().map(frame => frame.querySelector('img').src);
-      
+
       // Populate slider
       images.forEach(src => {
         const slide = document.createElement('div');
@@ -785,19 +864,19 @@
         slide.appendChild(img);
         lightboxSlider.appendChild(slide);
       });
-      
+
       // Open Lightbox on Click
       pictFrames.forEach(frame => {
         frame.style.cursor = 'pointer';
         frame.addEventListener('click', () => {
           const src = frame.querySelector('img').src;
           const index = images.indexOf(src);
-          
+
           lightboxModal.classList.add('active');
-          
+
           // Disable smooth scrolling temporarily to jump to the right slide immediately
           lightboxSlider.style.scrollBehavior = 'auto';
-          
+
           // Scroll to the targeted slide
           setTimeout(() => {
             const targetSlide = lightboxSlider.children[index];
@@ -814,23 +893,23 @@
           }, 10);
         });
       });
-      
+
       // Close Lightbox
       lightboxClose.addEventListener('click', () => {
         lightboxModal.classList.remove('active');
       });
-      
+
       lightboxModal.addEventListener('click', (e) => {
         if (e.target === lightboxModal || e.target.classList.contains('lightbox-slide')) {
           lightboxModal.classList.remove('active');
         }
       });
-      
+
       // Navigation Buttons
       lightboxPrev.addEventListener('click', () => {
         lightboxSlider.scrollBy({ left: -lightboxSlider.clientWidth, behavior: 'smooth' });
       });
-      
+
       lightboxNext.addEventListener('click', () => {
         lightboxSlider.scrollBy({ left: lightboxSlider.clientWidth, behavior: 'smooth' });
       });

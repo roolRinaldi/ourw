@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
   <meta name="description" content="Wedding Invitation - Tasya & Fachrul - Sabtu, 03 Oktober 2026">
   <title>The Wedding of Tasya & Fachrul</title>
 
@@ -396,6 +397,17 @@
        Scripts & Interactions
        ========================================================================== -->
   <script>
+    // Reliable viewport height fallback for older iOS/Android browsers that do
+    // not support dynamic viewport units.
+    (function setAppViewportHeight() {
+      function updateHeight() {
+        document.documentElement.style.setProperty('--app-height', window.innerHeight + 'px');
+      }
+      updateHeight();
+      window.addEventListener('resize', updateHeight, { passive: true });
+      window.addEventListener('orientationchange', updateHeight, { passive: true });
+    })();
+
     // Button Interaction to open Homepage
     document.getElementById('openBtn').addEventListener('click', function () {
       this.style.transform = 'scale(0.95)';
