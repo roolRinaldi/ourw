@@ -487,6 +487,58 @@
        </section>
      </div>
 
+      <!-- ----------------------------------------------------------------------
+         Section H: Wishes
+         Set data-submit-url to a deployed Google Apps Script web-app URL to
+         persist new wishes to the linked spreadsheet.
+         ---------------------------------------------------------------------- -->
+      <section class="hp-section wishes-hp-section" id="wishesSection"
+        data-sheet-id="1dK1B_yrHUx7j4CevMYTz5IJTNW6KhNFdp6kJXF1lK10" data-submit-url="">
+        <div class="wishes-overlay" aria-hidden="true"></div>
+        <div class="wishes-content">
+          <div class="wishes-heading" aria-labelledby="wishesTitle">
+            <span class="wishes-heading-line"></span>
+            <h2 id="wishesTitle">WISHES</h2>
+            <span class="wishes-heading-line"></span>
+          </div>
+
+          <form class="wishes-form" id="wishesForm">
+            <div class="wish-field">
+              <label for="wishName">Nama Lengkap</label>
+              <input id="wishName" name="name" type="text" autocomplete="name" maxlength="80" required>
+            </div>
+            <div class="wish-field wish-message-field">
+              <label for="wishMessage">Ucapan &amp; Do'a</label>
+              <textarea id="wishMessage" name="message" rows="3" maxlength="600" required></textarea>
+            </div>
+            <div class="wish-submit-row">
+              <span class="wish-submit-line" aria-hidden="true"></span>
+              <button class="wish-submit" id="wishSubmit" type="submit">Kirim</button>
+            </div>
+            <p class="wish-form-status" id="wishFormStatus" role="status" aria-live="polite"></p>
+          </form>
+
+          <div class="wishes-heading your-wishes-heading" aria-labelledby="yourWishesTitle">
+            <span class="wishes-heading-line"></span>
+            <h2 id="yourWishesTitle">YOUR WISHES</h2>
+            <span class="wishes-heading-line"></span>
+          </div>
+
+          <div class="wishes-list" id="wishesList" aria-live="polite"></div>
+          <p class="wishes-empty" id="wishesEmpty">Belum ada ucapan. Jadilah yang pertama!</p>
+
+          <nav class="wishes-pagination" aria-label="Navigasi halaman ucapan">
+            <span class="wishes-pagination-line"></span>
+            <div class="wishes-page-controls">
+              <button type="button" id="wishesPrev" aria-label="Halaman sebelumnya">&#8592;</button>
+              <span id="wishesPageIndicator">1/1</span>
+              <button type="button" id="wishesNext" aria-label="Halaman berikutnya">&#8594;</button>
+            </div>
+            <span class="wishes-pagination-line"></span>
+          </nav>
+        </div>
+      </section>
+
     </main>
   </div>
 
@@ -839,6 +891,129 @@
         });
       });
     }
+
+    // ==========================================================================
+    // Wishes form, spreadsheet loading, and pagination
+    // ==========================================================================
+    (function initWishes() {
+      const section = document.getElementById('wishesSection');
+      const form = document.getElementById('wishesForm');
+      const list = document.getElementById('wishesList');
+      if (!section || !form || !list) return;
+
+      const pageSize = 3;
+      const storageKey = 'tasya-fachrul-wishes';
+      const submitUrl = section.dataset.submitUrl.trim();
+      const sheetId = section.dataset.sheetId;
+      const status = document.getElementById('wishFormStatus');
+      const empty = document.getElementById('wishesEmpty');
+      const indicator = document.getElementById('wishesPageIndicator');
+      const prev = document.getElementById('wishesPrev');
+      const next = document.getElementById('wishesNext');
+      const submit = document.getElementById('wishSubmit');
+      let wishes = [];
+      let page = 1;
+
+      function readLocalWishes() {
+        try { return JSON.parse(localStorage.getItem(storageKey) || '[]'); }
+        catch (error) { return []; }
+      }
+
+      function escapeText(value) {
+        const node = document.createElement('div');
+        node.textContent = value;
+        return node.innerHTML;
+      }
+
+      function renderWishes() {
+        const pages = Math.max(1, Math.ceil(wishes.length / pageSize));
+        page = Math.min(Math.max(1, page), pages);
+        const visible = wishes.slice((page - 1) * pageSize, page * pageSize);
+        list.innerHTML = visible.map(function (wish) {
+          return '<article class="wish-card">' +
+            '<span class="wish-avatar" aria-hidden="true"><span></span></span>' +
+            '<div class="wish-copy"><h3>' + escapeText(wish.name) + '</h3>' +
+            '<p>' + escapeText(wish.message) + '</p></div></article>';
+        }).join('');
+        empty.hidden = wishes.length > 0;
+        indicator.textContent = page + '/' + pages;
+        prev.disabled = page === 1;
+        next.disabled = page === pages;
+      }
+
+      function normalizeRows(rows) {
+        return rows.map(function (row, index) {
+          return {
+            name: String(row.name || row.nama || row[0] || '').trim(),
+            message: String(row.message || row.ucapan || row.wish || row[1] || '').trim(),
+            createdAt: row.createdAt || row.timestamp || row[2] || index
+          };
+        }).filter(function (wish) {
+          const isHeader = /^(nama|nama lengkap)$/i.test(wish.name) && /^(ucapan|ucapan & do'a|message)$/i.test(wish.message);
+          return wish.name && wish.message && !isHeader;
+        });
+      }
+
+      async function loadSheetWishes() {
+        wishes = readLocalWishes();
+        renderWishes();
+        try {
+          const url = 'https://docs.google.com/spreadsheets/d/' + sheetId + '/gviz/tq?tqx=out:json';
+          const response = await fetch(url);
+          if (!response.ok) throw new Error('Spreadsheet tidak dapat dibaca');
+          const raw = await response.text();
+          const data = JSON.parse(raw.slice(raw.indexOf('{'), raw.lastIndexOf('}') + 1));
+          const rows = (data.table.rows || []).map(function (row) {
+            return row.c.map(function (cell) { return cell ? (cell.f || cell.v || '') : ''; });
+          });
+          // Sheets are append-only, so reversing rows places the newest first.
+          const remote = normalizeRows(rows).reverse();
+          wishes = readLocalWishes().concat(remote);
+          renderWishes();
+        } catch (error) {
+          // Local wishes remain available when the spreadsheet is private or offline.
+        }
+      }
+
+      form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        const name = form.elements.name.value.trim();
+        const message = form.elements.message.value.trim();
+        if (!name || !message) return;
+        const wish = { name: name, message: message, createdAt: new Date().toISOString() };
+        submit.disabled = true;
+        status.textContent = 'Mengirim...';
+
+        try {
+          if (submitUrl) {
+            await fetch(submitUrl, {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+              body: JSON.stringify(wish)
+            });
+          } else {
+            const local = readLocalWishes();
+            local.unshift(wish);
+            localStorage.setItem(storageKey, JSON.stringify(local));
+          }
+          wishes.unshift(wish);
+          page = 1;
+          renderWishes();
+          form.reset();
+          status.textContent = submitUrl ? 'Ucapan berhasil dikirim.' : 'Ucapan tersimpan di perangkat ini.';
+        } catch (error) {
+          status.textContent = 'Ucapan belum terkirim. Silakan coba lagi.';
+        } finally {
+          submit.disabled = false;
+          window.setTimeout(function () { status.textContent = ''; }, 3500);
+        }
+      });
+
+      prev.addEventListener('click', function () { page -= 1; renderWishes(); });
+      next.addEventListener('click', function () { page += 1; renderWishes(); });
+      loadSheetWishes();
+    })();
 
     // ==========================================================================
     // Lightbox Gallery Interaction
