@@ -510,7 +510,7 @@
             </div>
             <div class="wish-field wish-message-field">
               <label for="wishMessage">Ucapan &amp; Do'a</label>
-              <textarea id="wishMessage" name="message" rows="3" maxlength="600" required></textarea>
+              <textarea id="wishMessage" name="message" rows="1" maxlength="200" required></textarea>
             </div>
             <div class="wish-submit-row">
               <span class="wish-submit-line" aria-hidden="true"></span>
@@ -912,8 +912,16 @@
       const prev = document.getElementById('wishesPrev');
       const next = document.getElementById('wishesNext');
       const submit = document.getElementById('wishSubmit');
+      const messageField = document.getElementById('wishMessage');
       let wishes = [];
       let page = 1;
+
+      function resizeMessageField() {
+        messageField.style.height = 'auto';
+        messageField.style.height = messageField.scrollHeight + 'px';
+      }
+
+      messageField.addEventListener('input', resizeMessageField);
 
       function readLocalWishes() {
         try { return JSON.parse(localStorage.getItem(storageKey) || '[]'); }
@@ -1002,6 +1010,7 @@
           page = 1;
           renderWishes();
           form.reset();
+          resizeMessageField();
           status.textContent = submitUrl ? 'Ucapan berhasil dikirim.' : 'Ucapan tersimpan di perangkat ini.';
         } catch (error) {
           status.textContent = 'Ucapan belum terkirim. Silakan coba lagi.';

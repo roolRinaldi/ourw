@@ -2230,7 +2230,11 @@ canvas {
 }
 
 .wish-field input { height: 20px; }
-.wish-field textarea { height: 61px; }
+.wish-field textarea {
+  height: auto;
+  min-height: 61px;
+  overflow: hidden;
+}
 
 .wish-field:focus-within {
   border-bottom-color: #fafafa;

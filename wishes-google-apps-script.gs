@@ -13,7 +13,7 @@ function doPost(event) {
   try {
     const payload = JSON.parse(event.postData.contents || '{}');
     const name = String(payload.name || '').trim().slice(0, 80);
-    const message = String(payload.message || '').trim().slice(0, 600);
+    const message = String(payload.message || '').trim().slice(0, 200);
 
     if (!name || !message) {
       return jsonResponse({ ok: false, error: 'Name and message are required.' });
