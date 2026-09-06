@@ -540,6 +540,38 @@
         </div>
       </section>
 
+      <!-- ----------------------------------------------------------------------
+         Section I: Thanks / Closing
+         ---------------------------------------------------------------------- -->
+      <section class="hp-section thanks-hp-section" id="thanksSection" aria-labelledby="thanksTitle">
+        <div class="thanks-content">
+          <header class="thanks-heading">
+            <span class="thanks-line" aria-hidden="true"></span>
+            <h2 id="thanksTitle">FROM US</h2>
+            <span class="thanks-line" aria-hidden="true"></span>
+          </header>
+
+          <div class="thanks-message">
+            <p>Merupakan suatu kebahagiaan dan kehormatan bagi<br>
+              kami, apabila Bapak/Ibu/Saudara/i, berkenan memberikan<br>
+              do&rsquo;a restu kepada kami, kami ucapkan</p>
+            <p class="thanks-script">Thank you</p>
+          </div>
+
+          <div class="thanks-family">
+            <div class="thanks-family-heading">
+              <span class="thanks-line" aria-hidden="true"></span>
+              <p>Kami Yang Berbahagia</p>
+              <span class="thanks-line" aria-hidden="true"></span>
+            </div>
+            <p class="thanks-names">Fachrul &amp; Tasya</p>
+            <img class="thanks-cats" src="kucing.png" alt="Ilustrasi tiga kucing">
+          </div>
+
+          <p class="thanks-credit">Made With <span aria-label="love">&#9829;</span> By Fachrul &amp; Tasya</p>
+        </div>
+      </section>
+
     </main>
   </div>
 
@@ -554,6 +586,11 @@
       <!-- Images injected via JS -->
     </div>
   </div>
+
+  <audio id="weddingAudio" src="Risk_It_All.mp3" preload="metadata" loop></audio>
+  <button class="music-toggle" id="musicToggle" type="button" aria-label="Jeda musik" aria-pressed="false">
+    <span class="music-toggle-icon" aria-hidden="true"></span>
+  </button>
 
   <!-- ==========================================================================
        Scripts & Interactions
@@ -576,6 +613,16 @@
 
       const welcomeCover = document.getElementById('welcomeCover');
       const homepageContainer = document.getElementById('homepageContainer');
+      const weddingAudio = document.getElementById('weddingAudio');
+      const musicToggle = document.getElementById('musicToggle');
+
+      if (weddingAudio) {
+        weddingAudio.play().then(function () {
+          if (musicToggle) musicToggle.classList.add('is-visible');
+        }).catch(function (error) {
+          console.warn('Background music could not be started:', error);
+        });
+      }
 
       setTimeout(() => {
         // Smooth Transition
@@ -596,6 +643,34 @@
         }, 600);
       }, 150);
     });
+
+    // Floating music pause / resume control
+    (function initMusicToggle() {
+      const audio = document.getElementById('weddingAudio');
+      const button = document.getElementById('musicToggle');
+      if (!audio || !button) return;
+
+      function updateMusicButton() {
+        const isPaused = audio.paused;
+        button.classList.toggle('is-paused', isPaused);
+        button.setAttribute('aria-pressed', String(isPaused));
+        button.setAttribute('aria-label', isPaused ? 'Putar musik' : 'Jeda musik');
+      }
+
+      button.addEventListener('click', function () {
+        if (audio.paused) {
+          audio.play().catch(function (error) {
+            console.warn('Background music could not be resumed:', error);
+          });
+        } else {
+          audio.pause();
+        }
+      });
+
+      audio.addEventListener('play', updateMusicButton);
+      audio.addEventListener('pause', updateMusicButton);
+      updateMusicButton();
+    })();
 
     // ==========================================================================
     // 3D Smooth Rotating Ring Object (Three.js WebGL)
@@ -902,7 +977,7 @@
       const list = document.getElementById('wishesList');
       if (!section || !form || !list) return;
 
-      const pageSize = 3;
+      const pageSize = 4;
       const storageKey = 'tasya-fachrul-wishes';
       const submitUrl = section.dataset.submitUrl.trim();
       const sheetId = section.dataset.sheetId;
