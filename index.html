@@ -46,7 +46,7 @@
           <span class="groom-bride-name">Tasya</span>
 
           <div class="rings-wrapper">
-            <img src="cincin/cincin/cincin00000.png" alt="Wedding rings" class="rings-sequence-frame" id="ringsSequence"
+            <img src="cincin/cincin/cincin/cincin00000.png" alt="Wedding rings" class="rings-sequence-frame" id="ringsSequence"
               width="850" height="720" decoding="async" fetchpriority="high">
           </div>
 
@@ -690,7 +690,7 @@
       const sequence = document.getElementById('ringsSequence');
       if (!sequence) return;
 
-      const frameCount = 170;
+      const frameCount = 215;
       const frameDuration = 1000 / 30;
       const preloadAhead = 10;
       const loadedFrames = new Map();
@@ -698,7 +698,7 @@
       let startedAt = performance.now();
 
       function frameUrl(index) {
-        return `cincin/cincin/cincin${String(index).padStart(5, '0')}.png`;
+        return `cincin/cincin/cincin/cincin${String(index).padStart(5, '0')}.png`;
       }
 
       function preloadFrame(index) {
