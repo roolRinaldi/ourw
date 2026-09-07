@@ -57,8 +57,9 @@ canvas {
 .welcome-container {
   position: relative;
   width: 100vw;
-  min-height: 100vh;
-  min-height: 100dvh;
+  height: var(--app-height, 100vh);
+  height: 100svh;
+  height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -84,8 +85,8 @@ canvas {
 .content-wrapper {
   position: relative;
   z-index: 2;
-  width: 92%;
-  max-width: 440px;
+  width: min(92%, 1240px);
+  max-width: 1240px;
   /* Aligned to Figma specs for mobile proportions */
   height: var(--app-height, 100vh);
   height: 100dvh;
@@ -98,7 +99,7 @@ canvas {
   color: #ffffff;
   padding: 0;
   /* Margins will handle spacing */
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
 }
@@ -276,52 +277,49 @@ canvas {
 }
 
 .guest-greeting {
-  margin-top: clamp(24px, 3.5vh, 32px);
-  padding: 0 20px;
+  margin-top: clamp(22px, 3.2vh, 30px);
+  padding: 0;
   width: 100%;
+  display: grid;
+  grid-template-columns: minmax(24px, 1fr) auto minmax(24px, 1fr);
+  align-items: center;
+  column-gap: clamp(16px, 3vw, 52px);
   flex-shrink: 0;
-  line-height: 1.5;
+  line-height: 1.2;
   color: #f5f0e8;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
 }
 
 .guest-salutation {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 400;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #ded6c9;
+  letter-spacing: 0;
+  color: #fafafa;
 }
 
-.guest-salutation::before,
-.guest-salutation::after {
-  content: '';
-  width: 28px;
+.guest-line {
+  width: 100%;
   height: 1px;
-  background: rgba(222, 214, 201, 0.45);
+  background: rgba(250, 250, 250, 0.8);
 }
 
 .guest-title {
-  margin-top: 9px;
-  font-size: clamp(11px, 3vw, 13px);
+  margin-top: 1px;
+  font-size: 12px;
   font-weight: 400;
   letter-spacing: 0.035em;
   color: #e3dfd9;
 }
 
 .guest-greeting .guest-name {
-  margin: 6px auto 0;
-  max-width: 340px;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(24px, 6.5vw, 30px);
+  grid-column: 1 / -1;
+  margin: clamp(22px, 3vh, 28px) auto 0;
+  max-width: 680px;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: clamp(16px, 2vw, 18px);
   font-weight: 400;
-  font-style: italic;
-  line-height: 1.35;
-  text-transform: capitalize;
+  font-style: normal;
+  line-height: 1.3;
   text-wrap: balance;
   overflow-wrap: anywhere;
 }
@@ -402,6 +400,48 @@ canvas {
   height: 32.9px;
   object-fit: contain;
   z-index: 2;
+}
+
+/* Wide cover follows the horizontal Figma composition. */
+@media (min-width: 769px) {
+
+  .pre-header,
+  .names-row {
+    max-width: 1100px;
+  }
+
+  .pre-header .line {
+    max-width: 350px;
+  }
+
+  .names-row {
+    height: clamp(150px, 23vh, 230px);
+  }
+
+  .groom-bride-name {
+    font-size: clamp(76px, 7.2vw, 106px);
+  }
+
+  .names-row .groom-bride-name:first-child {
+    top: 50%;
+    left: 28%;
+    transform: translateY(-50%);
+  }
+
+  .names-row .groom-bride-name:last-child {
+    right: 24%;
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .wedding-date {
+    margin-top: clamp(20px, 3.5vh, 36px);
+  }
+
+  .guest-greeting {
+    max-width: 1100px;
+  }
 }
 
 .animate-fade-in {
@@ -1455,6 +1495,19 @@ canvas {
     padding-left: max(16px, env(safe-area-inset-left, 16px));
   }
 
+  .header-section {
+    margin-top: max(6.6vh, env(safe-area-inset-top, 0px));
+  }
+
+  .sub-heading {
+    margin-top: clamp(14px, 2.5vh, 22px);
+    font-size: clamp(27px, 8vw, 34px);
+  }
+
+  .hero-section-welcome {
+    min-height: 0;
+  }
+
   .pre-header .line {
     max-width: 55px;
     min-width: 20px;
@@ -1467,6 +1520,7 @@ canvas {
   }
 
   .names-row {
+    height: clamp(208px, 34vh, 276px);
     gap: 0.3rem;
   }
 
@@ -1476,10 +1530,51 @@ canvas {
 
   .wedding-date {
     gap: clamp(12px, 4.4vw, 20px);
+    margin-top: clamp(14px, 2.5vh, 24px);
   }
 
   .wedding-date span {
-    font-size: clamp(13px, 3.65vw, 16px);
+    font-size: clamp(11px, 3.2vw, 13px);
+  }
+
+  .guest-greeting {
+    grid-template-columns: minmax(36px, 1fr) auto minmax(36px, 1fr);
+    column-gap: clamp(14px, 6vw, 28px);
+    margin-top: clamp(19px, 2.8vh, 26px);
+  }
+
+  .guest-salutation,
+  .guest-title {
+    font-size: clamp(9px, 2.65vw, 11px);
+  }
+
+  .guest-greeting .guest-name {
+    margin-top: clamp(18px, 2.7vh, 24px);
+    font-size: clamp(14px, 4vw, 16px);
+  }
+
+  .button-wrapper {
+    margin-top: clamp(22px, 3.4vh, 30px);
+  }
+
+  .btn-open {
+    font-size: 11px;
+    padding: 8px 18px;
+  }
+
+  .footer-section {
+    margin-top: clamp(22px, 3.3vh, 30px);
+    margin-bottom: max(6.2vh, env(safe-area-inset-bottom, 0px));
+  }
+
+  .footer-logo-container {
+    width: 42px;
+    height: 60px;
+  }
+
+  .footer-logo-ring1 {
+    width: 42px;
+    height: 60px;
   }
 
   .event-section-wrapper {
@@ -1533,47 +1628,397 @@ canvas {
 }
 
 @media (max-width: 375px) {
+  .content-wrapper {
+    padding-right: max(15px, env(safe-area-inset-right, 15px));
+    padding-left: max(15px, env(safe-area-inset-left, 15px));
+  }
+
+  .header-section {
+    margin-top: max(6vh, env(safe-area-inset-top, 0px));
+  }
+
   .pre-header-text {
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 0.24em;
-    margin-right: 6px;
-    margin-left: 6px;
+    margin-right: 9px;
+    margin-left: 9px;
   }
 
   .pre-header .line {
-    min-width: 12px;
+    width: 50px;
+    min-width: 20px;
+    max-width: 50px;
+  }
+
+  .sub-heading {
+    margin-top: clamp(12px, 2vh, 16px);
+    font-size: 29px;
+  }
+
+  .names-row {
+    height: clamp(190px, 31vh, 245px);
   }
 
   .groom-bride-name {
-    font-size: clamp(70px, 21vw, 79px);
+    font-size: clamp(66px, 20.5vw, 77px);
   }
 
-  .hero-name {
-    font-size: 68px;
+  .names-row .groom-bride-name:first-child {
+    top: 22px;
+    left: 5px;
   }
 
-  .hero-ampersand {
-    font-size: 68px;
+  .names-row .groom-bride-name:last-child {
+    right: 5px;
+    bottom: 4px;
   }
 
-  .bride-hp-section,
+  .rings-wrapper {
+    width: 92px;
+    height: 62px;
+  }
+
+  .wedding-date {
+    gap: 12px;
+    margin-top: clamp(12px, 2vh, 16px);
+  }
+
+  .wedding-date span {
+    font-size: 11px;
+    letter-spacing: 1.25px;
+  }
+
+  .date-dot {
+    width: 4px;
+    height: 4px;
+  }
+
+  .guest-greeting {
+    grid-template-columns: minmax(32px, 1fr) auto minmax(32px, 1fr);
+    column-gap: 14px;
+    margin-top: clamp(16px, 2.5vh, 20px);
+  }
+
+  .guest-salutation,
+  .guest-title {
+    font-size: 9px;
+  }
+
+  .guest-greeting .guest-name {
+    margin-top: clamp(15px, 2.2vh, 18px);
+    max-width: 315px;
+    font-size: 14px;
+  }
+
+  .button-wrapper {
+    margin-top: clamp(18px, 2.8vh, 23px);
+  }
+
+  .btn-open {
+    min-height: 32px;
+    padding: 7px 17px;
+    font-size: 10px;
+  }
+
+  .footer-section {
+    margin-top: clamp(18px, 2.8vh, 23px);
+    margin-bottom: max(5vh, env(safe-area-inset-bottom, 0px));
+  }
+
+  .footer-logo-container,
+  .footer-logo-ring1 {
+    width: 38px;
+    height: 54px;
+  }
+
+  .footer-logo-ring2 {
+    width: 35px;
+    height: 51px;
+  }
+
+  .footer-logo-icon {
+    width: 19px;
+    height: 27px;
+  }
+
+  /* Main invitation: scale the 440px Figma canvas to a 375px viewport. */
+  .main-content-frame {
+    width: 100%;
+    max-width: 375px;
+    margin: 0 auto;
+  }
+
+  .hero-hp-section {
+    height: 100dvh;
+    min-height: 667px;
+    max-height: 801px;
+    padding: 52px 17px;
+  }
+
+  .hero-hp-img {
+    transform: scale(1.03);
+  }
+
+  .top-badge-outer,
+  .scroll-down-outer {
+    width: 33px;
+    height: 47px;
+  }
+
+  .top-badge-inner,
+  .scroll-down-inner {
+    width: 30px;
+    height: 44px;
+  }
+
+  .top-badge-icon {
+    width: 16px;
+    height: 22px;
+  }
+
+  .hero-names-group {
+    max-width: 344px;
+  }
+
+  .name-fachrul {
+    margin-left: 15px;
+  }
+
+  .name-tasya {
+    margin-right: 15px;
+  }
+
+  .hero-ampersand-wrapper {
+    height: 79px;
+    margin: -26px 0;
+  }
+
+  .hero-subtitle {
+    margin-top: clamp(190px, 34vh, 255px);
+    margin-bottom: 17px;
+    font-size: 11px;
+    letter-spacing: 3.2px;
+  }
+
+  .scroll-down-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .ayat-hp-section {
+    height: auto;
+    min-height: 232px;
+    padding: 40px 31px;
+  }
+
+  .ayat-container {
+    max-width: 313px;
+  }
+
+  .ayat-bismillah,
+  .ayat-quote {
+    font-size: 11px;
+  }
+
+  .ayat-quote {
+    margin-bottom: 15px;
+    line-height: 1.55;
+  }
+
+  .ayat-surah {
+    font-size: 12.5px;
+  }
+
+  .bride-hp-section {
+    height: 652px;
+    min-height: 652px;
+    padding: 110px 31px 38px;
+  }
+
   .groom-hp-section {
-    padding-right: 20px;
-    padding-left: 20px;
+    height: 617px;
+    min-height: 617px;
+    padding: 109px 31px 38px;
+  }
+
+  .couple-content,
+  .person-info-block {
+    max-width: 313px;
   }
 
   .framed-photo-container {
-    height: 300px;
+    width: 343px;
+    height: 281px;
+    margin-bottom: 38px;
   }
 
   .photo-border-box {
-    width: calc(100% - 52px);
-    height: 300px;
-    margin-left: 52px;
+    width: 255px;
+    height: 281px;
+    margin-left: 88px;
   }
 
   .groom-photo-container .photo-border-box {
     margin-left: 0;
+  }
+
+  .section-script-title {
+    top: 8px;
+    font-size: 39px;
+  }
+
+  .person-full-name,
+  .groom-name-text {
+    margin-bottom: 21px;
+    font-size: 23.5px;
+  }
+
+  .name-line2 {
+    margin-left: 31px;
+  }
+
+  .parents-meta-label {
+    margin-bottom: 17px;
+  }
+
+  .meta-label-text,
+  .parent-title {
+    font-size: 11px;
+  }
+
+  .parent-title {
+    min-width: 61px;
+  }
+
+  .parent-name {
+    font-size: 15.5px;
+  }
+
+  .parent-and-divider {
+    margin-left: 31px;
+    font-size: 23.5px;
+  }
+
+  .father-second-line {
+    margin-left: 47px;
+  }
+
+  .bride-hp-section .parents-names-layout {
+    padding-left: 94px;
+  }
+
+  .groom-hp-section .parents-names-layout {
+    padding-left: 0;
+  }
+
+  .bride-hp-section .parent-and-divider,
+  .groom-hp-section .parent-and-divider {
+    margin-left: 0;
+  }
+
+  .date-hp-section {
+    min-height: 682px;
+    padding: 62px 15px;
+  }
+
+  .date-content-wrapper,
+  .moment-header-block,
+  .gift-content-wrapper {
+    max-width: 344px;
+  }
+
+  .date-header-block {
+    margin-bottom: 70px;
+  }
+
+  .date-title-row {
+    margin-bottom: 21px;
+  }
+
+  .date-title,
+  .moment-title {
+    font-size: 12.5px;
+  }
+
+  .countdown-wrapper {
+    margin-bottom: 25px;
+  }
+
+  .cd-number,
+  .cd-colon {
+    font-size: 39px;
+  }
+
+  .cd-label,
+  .event-time-tz,
+  .event-venue-address {
+    font-size: 11px;
+  }
+
+  .event-date-list {
+    gap: 30px;
+  }
+
+  .event-type-title {
+    font-size: 12.5px;
+  }
+
+  .event-time-value {
+    font-size: 39px;
+  }
+
+  .event-venue-name {
+    font-size: 15.5px;
+  }
+
+  .moment-header-block {
+    top: 62px;
+  }
+
+  .moment-photo-stack {
+    max-width: 375px;
+    height: 350px;
+    transform: scale(.88);
+  }
+
+  .gift-hp-section {
+    padding: 45px 15px;
+  }
+
+  .gift-header {
+    top: auto;
+  }
+
+  .gift-account-number {
+    font-size: 18px;
+  }
+
+  .gift-account-name,
+  .gift-address {
+    font-size: 17px;
+  }
+
+  .wishes-hp-section {
+    min-height: 812px;
+  }
+
+  .wishes-content {
+    max-width: 375px;
+    padding: 55px 15px 49px;
+  }
+
+  .wishes-form,
+  .wishes-list {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .hero-name {
+    font-size: 70px;
+  }
+
+  .hero-ampersand {
+    font-size: 70px;
   }
 
   .event-section-wrapper {
@@ -1594,20 +2039,20 @@ canvas {
 /* Short mobile viewports and landscape phones. */
 @media (max-height: 600px) and (max-width: 932px) {
   .header-section {
-    margin-top: max(24px, env(safe-area-inset-top, 24px));
+    margin-top: max(14px, env(safe-area-inset-top, 0px));
   }
 
   .footer-section {
-    margin-bottom: max(24px, env(safe-area-inset-bottom, 24px));
+    margin-bottom: max(12px, env(safe-area-inset-bottom, 0px));
   }
 
   .sub-heading {
-    margin-top: 10px;
-    font-size: 34px;
+    margin-top: 6px;
+    font-size: 25px;
   }
 
   .names-row {
-    height: 220px;
+    height: 150px;
   }
 
   .groom-bride-name {
@@ -1615,7 +2060,7 @@ canvas {
   }
 
   .names-row .groom-bride-name:first-child {
-    top: 18px;
+    top: 4px;
   }
 
   .names-row .groom-bride-name:last-child {
@@ -1624,11 +2069,35 @@ canvas {
 
   .wedding-date,
   .button-wrapper {
-    margin-top: 24px;
+    margin-top: 10px;
   }
 
   .footer-section {
-    margin-top: 24px;
+    margin-top: 10px;
+  }
+
+  .guest-greeting {
+    margin-top: 10px;
+  }
+
+  .guest-greeting .guest-name {
+    margin-top: 8px;
+  }
+
+  .footer-logo-container,
+  .footer-logo-ring1 {
+    width: 32px;
+    height: 46px;
+  }
+
+  .footer-logo-ring2 {
+    width: 29px;
+    height: 43px;
+  }
+
+  .footer-logo-icon {
+    width: 17px;
+    height: 24px;
   }
 
   .moment-header-block {
@@ -2280,7 +2749,10 @@ canvas {
   font: 400 14px/1.45 'Inter Tight', sans-serif;
 }
 
-.wish-field input { height: 20px; }
+.wish-field input {
+  height: 20px;
+}
+
 .wish-field textarea {
   height: auto;
   min-height: 61px;
@@ -2310,11 +2782,26 @@ canvas {
   cursor: pointer;
 }
 
-.wish-submit:disabled { opacity: .55; cursor: wait; }
-.wish-form-status { min-height: 15px; margin: 6px 0 0; text-align: right; font: 300 10px/1.4 'Inter Tight', sans-serif; }
+.wish-submit:disabled {
+  opacity: .55;
+  cursor: wait;
+}
 
-.your-wishes-heading { margin-top: 35px; gap: 25px; }
-.wishes-list { padding: 16px 14px 0; }
+.wish-form-status {
+  min-height: 15px;
+  margin: 6px 0 0;
+  text-align: right;
+  font: 300 10px/1.4 'Inter Tight', sans-serif;
+}
+
+.your-wishes-heading {
+  margin-top: 35px;
+  gap: 25px;
+}
+
+.wishes-list {
+  padding: 16px 14px 0;
+}
 
 .wish-card {
   display: grid;
@@ -2356,9 +2843,23 @@ canvas {
   background: #5f6559;
 }
 
-.wish-copy h3 { margin: 0 0 8px; font: 500 15px/1.15 'Inter Tight', sans-serif; }
-.wish-copy p { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 300 11px/1.15 'Inter Tight', sans-serif; }
-.wishes-empty { margin: 30px 14px; text-align: center; font: 300 12px/1.4 'Inter Tight', sans-serif; }
+.wish-copy h3 {
+  margin: 0 0 8px;
+  font: 500 15px/1.15 'Inter Tight', sans-serif;
+}
+
+.wish-copy p {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font: 300 11px/1.15 'Inter Tight', sans-serif;
+}
+
+.wishes-empty {
+  margin: 30px 14px;
+  text-align: center;
+  font: 300 12px/1.4 'Inter Tight', sans-serif;
+}
 
 .wishes-pagination {
   display: grid;
@@ -2368,7 +2869,13 @@ canvas {
   margin-top: 28px;
 }
 
-.wishes-page-controls { display: flex; align-items: center; gap: 14px; font: 400 12px/1 'Inter Tight', sans-serif; }
+.wishes-page-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font: 400 12px/1 'Inter Tight', sans-serif;
+}
+
 .wishes-page-controls button {
   display: grid;
   place-items: center;
@@ -2382,13 +2889,31 @@ canvas {
   font: 700 11px/1 sans-serif;
   cursor: pointer;
 }
-.wishes-page-controls button:disabled { opacity: .42; cursor: default; }
+
+.wishes-page-controls button:disabled {
+  opacity: .42;
+  cursor: default;
+}
 
 @media (max-width: 375px) {
-  .wishes-content { padding-right: 15px; padding-left: 15px; }
-  .wishes-heading { gap: 18px; }
-  .wishes-form, .wishes-list { padding-right: 14px; padding-left: 14px; }
-  .your-wishes-heading { gap: 20px; }
+  .wishes-content {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .wishes-heading {
+    gap: 18px;
+  }
+
+  .wishes-form,
+  .wishes-list {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .your-wishes-heading {
+    gap: 20px;
+  }
 }
 
 /* ==========================================================================
@@ -2442,7 +2967,7 @@ canvas {
   left: 4%;
 }
 
-.thanks-message > p:first-child {
+.thanks-message>p:first-child {
   margin: 0;
   color: rgba(250, 250, 250, .9);
   font: 300 3.08cqw/1.38 'Inter Tight', sans-serif;
@@ -2539,8 +3064,13 @@ canvas {
   pointer-events: auto;
 }
 
-.music-toggle:hover { background: rgba(8, 8, 8, .72); }
-.music-toggle:active { transform: scale(.94); }
+.music-toggle:hover {
+  background: rgba(8, 8, 8, .72);
+}
+
+.music-toggle:active {
+  transform: scale(.94);
+}
 
 .music-toggle-icon,
 .music-toggle-icon::after {
@@ -2574,12 +3104,32 @@ canvas {
   background: transparent;
 }
 
-.music-toggle.is-paused .music-toggle-icon::after { display: none; }
+.music-toggle.is-paused .music-toggle-icon::after {
+  display: none;
+}
 
 @supports not (font-size: 1cqw) {
-  .thanks-heading h2 { font-size: 13px; }
-  .thanks-message > p:first-child, .thanks-family-heading p, .thanks-credit { font-size: 12px; }
-  .thanks-script { margin-top: 18px; font-size: 55px; }
-  .thanks-names { margin-top: 24px; font-size: 47px; }
-  .thanks-cats { margin-top: 28px; }
+  .thanks-heading h2 {
+    font-size: 13px;
+  }
+
+  .thanks-message>p:first-child,
+  .thanks-family-heading p,
+  .thanks-credit {
+    font-size: 12px;
+  }
+
+  .thanks-script {
+    margin-top: 18px;
+    font-size: 55px;
+  }
+
+  .thanks-names {
+    margin-top: 24px;
+    font-size: 47px;
+  }
+
+  .thanks-cats {
+    margin-top: 28px;
+  }
 }
