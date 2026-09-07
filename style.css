@@ -219,33 +219,13 @@ canvas {
   perspective: 600px;
 }
 
-.rings-3d-canvas {
+.rings-sequence-frame {
   width: 100%;
   height: 100%;
   display: block;
+  object-fit: cover;
+  object-position: center;
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5));
-}
-
-.rings-icon {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.5));
-}
-
-.fallback-ring {
-  animation: spin3DFallback 6s linear infinite;
-  transform-style: preserve-3d;
-}
-
-@keyframes spin3DFallback {
-  from {
-    transform: rotateY(0deg);
-  }
-
-  to {
-    transform: rotateY(360deg);
-  }
 }
 
 .wedding-date {
@@ -383,6 +363,7 @@ canvas {
   display: flex;
   align-items: center;
   justify-content: center;
+  scale: 70%;
 }
 
 .footer-logo-ring1 {
