@@ -69,6 +69,12 @@
           <span>2026</span>
         </div>
 
+        <div class="guest-greeting animate-fade-in" style="--delay: 4;">
+          <p class="guest-salutation">Kepada Yth.</p>
+          <p class="guest-title">Bapak/Ibu/Saudara/i</p>
+          <p class="guest-name" id="guestName">Tamu Undangan</p>
+        </div>
+
         <!-- Open Invitation Button -->
         <div class="button-wrapper animate-fade-in" style="--delay: 4;">
           <button type="button" class="btn-open" id="openBtn">
@@ -596,6 +602,11 @@
        Scripts & Interactions
        ========================================================================== -->
   <script>
+    // Each invitation can use its own recipient, for example ?to=Tri%20Murtiningsih.
+    const guestName = new URLSearchParams(window.location.search).get('to');
+    document.getElementById('guestName').textContent =
+      (guestName && guestName.trim()) || 'Tamu Undangan';
+
     // Reliable viewport height fallback for older iOS/Android browsers that do
     // not support dynamic viewport units.
     (function setAppViewportHeight() {

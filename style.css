@@ -275,8 +275,59 @@ canvas {
   display: block;
 }
 
+.guest-greeting {
+  margin-top: clamp(24px, 3.5vh, 32px);
+  padding: 0 20px;
+  width: 100%;
+  flex-shrink: 0;
+  line-height: 1.5;
+  color: #f5f0e8;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.guest-salutation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #ded6c9;
+}
+
+.guest-salutation::before,
+.guest-salutation::after {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: rgba(222, 214, 201, 0.45);
+}
+
+.guest-title {
+  margin-top: 9px;
+  font-size: clamp(11px, 3vw, 13px);
+  font-weight: 400;
+  letter-spacing: 0.035em;
+  color: #e3dfd9;
+}
+
+.guest-greeting .guest-name {
+  margin: 6px auto 0;
+  max-width: 340px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(24px, 6.5vw, 30px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.35;
+  text-transform: capitalize;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
 .button-wrapper {
-  margin-top: 6.6vh;
+  margin-top: 20px;
   margin-bottom: auto;
   /* Pushes footer down */
   width: 100%;
