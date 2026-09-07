@@ -126,16 +126,16 @@ canvas {
 }
 
 .pre-header {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(24px, 1fr) auto minmax(24px, 1fr);
   align-items: center;
-  justify-content: center;
+  column-gap: clamp(16px, 3vw, 52px);
   width: 100%;
   max-width: 400px;
 }
 
 .pre-header .line {
-  flex: 1;
-  max-width: 51px;
+  width: 100%;
   height: 1px;
   background-color: #fafafa;
 }
@@ -146,7 +146,7 @@ canvas {
   font-weight: 400;
   letter-spacing: 0.3em;
   color: #fafafa;
-  margin: 0 14px;
+  margin: 0;
   white-space: nowrap;
   text-transform: uppercase;
 }
@@ -295,6 +295,7 @@ canvas {
   font-weight: 400;
   letter-spacing: 0;
   color: #fafafa;
+  opacity: 50%;
 }
 
 .guest-line {
@@ -309,12 +310,16 @@ canvas {
   font-weight: 400;
   letter-spacing: 0.035em;
   color: #e3dfd9;
+  opacity: 50%;
 }
 
 .guest-greeting .guest-name {
   grid-column: 1 / -1;
   margin: clamp(22px, 3vh, 28px) auto 0;
+  width: 100%;
   max-width: 680px;
+  padding-bottom: clamp(16px, 2.4vh, 22px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   font-family: 'Inter Tight', sans-serif;
   font-size: clamp(16px, 2vw, 18px);
   font-weight: 400;
@@ -411,7 +416,7 @@ canvas {
   }
 
   .pre-header .line {
-    max-width: 350px;
+    max-width: none;
   }
 
   .names-row {
@@ -1509,14 +1514,19 @@ canvas {
   }
 
   .pre-header .line {
-    max-width: 55px;
-    min-width: 20px;
+    width: 100%;
+    max-width: none;
+  }
+
+  .pre-header {
+    grid-template-columns: minmax(36px, 1fr) auto minmax(36px, 1fr);
+    column-gap: clamp(14px, 6vw, 28px);
   }
 
   .pre-header-text {
-    font-size: clamp(12px);
+    font-size: 12px;
     letter-spacing: 0.3em;
-    margin: 0 clamp(8px, 3vw, 14px);
+    margin: 0;
   }
 
   .names-row {
@@ -1640,14 +1650,18 @@ canvas {
   .pre-header-text {
     font-size: 11px;
     letter-spacing: 0.24em;
-    margin-right: 9px;
-    margin-left: 9px;
+    margin: 0;
   }
 
   .pre-header .line {
-    width: 50px;
-    min-width: 20px;
-    max-width: 50px;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+  }
+
+  .pre-header {
+    grid-template-columns: minmax(32px, 1fr) auto minmax(32px, 1fr);
+    column-gap: 14px;
   }
 
   .sub-heading {
