@@ -816,10 +816,11 @@ canvas {
   align-items: center;
   color: #ffffff;
   overflow: hidden;
+  /* height: ; */
 }
 
 .bride-hp-section {
-  height: 765px;
+  height: fit-content;
   min-height: 765px;
   padding: 129.25px 36.67px 45px 36.67px;
 }
@@ -874,11 +875,14 @@ canvas {
   overflow: hidden;
   position: relative;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  margin-left: 85.25px;
 }
 
 .groom-photo-container .photo-border-box {
   margin-left: 0;
+}
+
+.bride-photo-container .photo-border-box {
+  margin-left: 85.25px;
 }
 
 .couple-photo {
@@ -913,9 +917,22 @@ canvas {
 .person-info-block {
   width: 100%;
   max-width: 366.67px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.bride-person-info-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  justify-content: end;
+  align-items: end;
+  margin-bottom: 32px;
 }
 
 .person-full-name {
+  width: 100%;
   font-family: 'Inter Tight', sans-serif;
   font-style: italic;
   font-weight: 400;
@@ -971,12 +988,34 @@ canvas {
   display: block;
 }
 
+.line-divider {
+  width: 100%;
+  height: 1px;
+  border: 0.35px solid #fafafa;
+  opacity: .35;
+}
+
 .parents-names-layout {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 13px;
   padding-left: 8px;
   position: relative;
+}
+
+.bride-parents-layout {
+  width: fit-content;
+  justify-items: end;
+}
+
+.bride-parents-layout .parent-row {
+  width: fit-content;
+}
+
+.bride-parents-layout .parent-and-divider {
+  /* margin-left: 0px; */
+  /* margin-bottom: 1rem;  */
+  width: fit-content;
 }
 
 .parent-row {
@@ -1021,12 +1060,13 @@ canvas {
   font-family: 'Patung', 'Brush Script MT', cursive;
   font-size: 27.5px;
   color: rgba(255, 255, 255, 0.8);
-  margin: -4px 0 -4px 36px;
+  margin-left: 0;
+  /* margin: 8px 0 8px 0; */
 }
 
-.groom-divider {
+/* .groom-divider {
   margin-left: 36px;
-}
+} */
 
 /* ==========================================================================
    E. The Date Section Styling (Figma Specs: Node 11835-15781 / 11835-201)
@@ -1521,6 +1561,17 @@ canvas {
     font-size: clamp(76px, 22vw, 96px);
   }
 
+  .bride-photo-container .photo-border-box {
+    margin-left: 0px;
+  }
+
+  .bride-photo-container {
+    display: flex;
+    align-items: end;
+    justify-content: end;
+  }
+
+
   .wedding-date {
     gap: clamp(12px, 4.4vw, 20px);
     margin-top: clamp(14px, 2.5vh, 24px);
@@ -1801,7 +1852,7 @@ canvas {
   }
 
   .bride-hp-section {
-    height: 652px;
+    height: fit-content;
     min-height: 652px;
     padding: 110px 31px 38px;
   }
@@ -1826,7 +1877,7 @@ canvas {
   .photo-border-box {
     width: 255px;
     height: 281px;
-    margin-left: 88px;
+    margin-left: 0px;
   }
 
   .groom-photo-container .photo-border-box {
@@ -1866,7 +1917,7 @@ canvas {
   }
 
   .parent-and-divider {
-    margin-left: 31px;
+    /* margin-left: 31px; */
     font-size: 23.5px;
   }
 
