@@ -204,28 +204,45 @@ canvas {
   right: 20px;
 }
 
-/* 3D Rotating Ring Wrapper & Canvas */
+/* Responsive floating ring image */
 .rings-wrapper {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: clamp(100px, 28vw, 126px);
-  height: clamp(68px, 19vw, 84px);
+  width: clamp(92px, 26vw, 126px);
   z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  perspective: 600px;
+  overflow: visible;
 }
 
-.rings-sequence-frame {
+.rings-image {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5));
+  animation: rings-float 3.6s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes rings-float {
+  0%, 100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+
+  50% {
+    transform: translateY(-7px) rotate(1deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rings-image {
+    animation: none;
+  }
 }
 
 .wedding-date {
@@ -1712,8 +1729,7 @@ canvas {
   }
 
   .rings-wrapper {
-    width: 92px;
-    height: 62px;
+    width: clamp(78px, 23vw, 94px);
   }
 
   .wedding-date {

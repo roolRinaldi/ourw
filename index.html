@@ -46,8 +46,8 @@
           <span class="groom-bride-name">Tasya</span>
 
           <div class="rings-wrapper">
-            <img src="cincin.gif" alt="Wedding rings" class="rings-sequence-frame" id="ringsSequence" width="850"
-              height="720" decoding="async" fetchpriority="high">
+            <img src="cincin.png" alt="Wedding rings" class="rings-image" width="189" height="120"
+              decoding="async" fetchpriority="high">
           </div>
 
           <span class="groom-bride-name">Fachrul</span>
@@ -682,67 +682,6 @@
       audio.addEventListener('play', updateMusicButton);
       audio.addEventListener('pause', updateMusicButton);
       updateMusicButton();
-    })();
-
-    // ==========================================================================
-    // Continuously looping PNG ring sequence. Only nearby frames are retained
-    // in the preload window to avoid decoding the entire sequence on mobile.
-    // ==========================================================================
-    (function initRingsSequence() {
-      const sequence = document.getElementById('ringsSequence');
-      if (!sequence) return;
-
-      const frameCount = 215;
-      const frameDuration = 1000 / 30;
-      const preloadAhead = 10;
-      const loadedFrames = new Map();
-      let displayedFrame = 0;
-      let startedAt = performance.now();
-
-      function frameUrl(index) {
-        return `cincin/cincin/cincin/cincin${String(index).padStart(5, '0')}.png`;
-      }
-
-      function preloadFrame(index) {
-        const normalizedIndex = index % frameCount;
-        if (loadedFrames.has(normalizedIndex)) return;
-
-        const image = new Image();
-        image.decoding = 'async';
-        image.src = frameUrl(normalizedIndex);
-        loadedFrames.set(normalizedIndex, image);
-      }
-
-      for (let index = 0; index <= preloadAhead; index += 1) {
-        preloadFrame(index);
-      }
-
-      function renderFrame(now) {
-        const targetFrame = Math.floor((now - startedAt) / frameDuration) % frameCount;
-
-        if (targetFrame !== displayedFrame) {
-          const frame = loadedFrames.get(targetFrame);
-          if (frame && frame.complete && frame.naturalWidth > 0) {
-            sequence.src = frame.src;
-            displayedFrame = targetFrame;
-          }
-        }
-
-        for (let offset = 1; offset <= preloadAhead; offset += 1) {
-          preloadFrame(targetFrame + offset);
-        }
-
-        loadedFrames.forEach(function (_frame, index) {
-          const distanceAhead = (index - targetFrame + frameCount) % frameCount;
-          if (distanceAhead > preloadAhead && index !== displayedFrame) {
-            loadedFrames.delete(index);
-          }
-        });
-
-        requestAnimationFrame(renderFrame);
-      }
-
-      requestAnimationFrame(renderFrame);
     })();
 
     // ==========================================================================
